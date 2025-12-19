@@ -25,7 +25,7 @@ class Monetization {
                 this.cosmetics = parsed.cosmetics || this.cosmetics;
             }
         } catch (e) {
-            console.warn('Не удалось загрузить данные монетизации:', e);
+            console.warn('Failed to load monetization data:', e);
         }
     }
 
@@ -40,7 +40,7 @@ class Monetization {
             };
             localStorage.setItem('lucky_wave_monetization', JSON.stringify(data));
         } catch (e) {
-            console.warn('Не удалось сохранить данные монетизации:', e);
+            console.warn('Failed to save monetization data:', e);
         }
     }
 
@@ -164,7 +164,7 @@ class Monetization {
 
     
     purchaseKeys(amount, price) {
-                console.log(`Покупка ${amount} ключей за ${price}`);
+                console.log(`Purchase ${amount} keys for ${price}`);
         
                 this.addKeys(amount);
         return true;
@@ -172,7 +172,7 @@ class Monetization {
 
     
     purchaseTickets(amount, price) {
-                console.log(`Покупка ${amount} билетов за ${price}`);
+                console.log(`Purchase ${amount} tickets for ${price}`);
         
                 this.addTickets(amount);
         return true;

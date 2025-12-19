@@ -17,7 +17,7 @@ class HFImageGenerator {
                 this.cache = new Map(cacheData);
             }
         } catch (e) {
-            console.warn('Не удалось загрузить кэш изображений:', e);
+            console.warn('Failed to load image cache:', e);
         }
     }
 
@@ -27,7 +27,7 @@ class HFImageGenerator {
             const cacheArray = Array.from(this.cache.entries());
             localStorage.setItem('hf_image_cache', JSON.stringify(cacheArray));
         } catch (e) {
-            console.warn('Не удалось сохранить кэш изображений:', e);
+            console.warn('Failed to save image cache:', e);
         }
     }
 
@@ -37,10 +37,10 @@ class HFImageGenerator {
             const response = await fetch('assets/images/manifest.json');
             if (response.ok) {
                 this.manifest = await response.json();
-                console.log('Манифест изображений загружен');
+                console.log('Image manifest loaded');
             }
         } catch (e) {
-            console.warn('Не удалось загрузить манифест изображений:', e);
+            console.warn('Failed to load image manifest:', e);
         }
     }
 
@@ -77,12 +77,12 @@ class HFImageGenerator {
         const cacheKey = this.getCacheKey(prompt, width, height);
         
                 if (this.cache.has(cacheKey)) {
-            console.log('Изображение найдено в кэше:', cacheKey);
+            console.log('Image found in cache:', cacheKey);
             return this.cache.get(cacheKey);
         }
 
         try {
-            console.log('Генерация изображения через HF MCP:', prompt);
+            console.log('Generating image via HF MCP:', prompt);
             
                         let imageUrl = null;
             
@@ -96,7 +96,7 @@ class HFImageGenerator {
                         randomize_seed: seed === null
                     });
                 } catch (mcpError) {
-                    console.warn('Ошибка вызова MCP сервера, используем placeholder:', mcpError);
+                    console.warn('MCP server call error, using placeholder:', mcpError);
                 }
             }
             
@@ -109,7 +109,7 @@ class HFImageGenerator {
             
             return imageUrl;
         } catch (error) {
-            console.error('Ошибка генерации изображения:', error);
+            console.error('Image generation error:', error);
                         return this.createPlaceholderImage(prompt, width, height);
         }
     }
@@ -161,7 +161,7 @@ class HFImageGenerator {
                 const localPath = this.getLocalImagePath('character', characterName);
         
         if (localPath) {
-            console.log(`Используется локальное изображение персонажа: ${localPath}`);
+            console.log(`Using local character image: ${localPath}`);
             return localPath;
         }
         
@@ -180,7 +180,7 @@ class HFImageGenerator {
     async generateBackgroundImage(sceneName, description = '') {
                 const localPath = this.getLocalImagePath('background', sceneName);
         if (localPath) {
-            console.log(`Используется локальное изображение: ${localPath}`);
+            console.log(`Using local image: ${localPath}`);
             return localPath;
         }
         

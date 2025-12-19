@@ -15,11 +15,11 @@ class MCPBridge {
                 const response = await fetch(`${serverUrl}/health`);
                 if (response.ok) {
                     this.isConnected = true;
-                    console.log('MCP Bridge: Подключено через HTTP прокси');
+                    console.log('MCP Bridge: Connected via HTTP proxy');
                     return true;
                 }
             } catch (e) {
-                console.warn('MCP Bridge: Не удалось подключиться через HTTP:', e);
+                console.warn('MCP Bridge: Failed to connect via HTTP:', e);
             }
         }
 
@@ -28,13 +28,13 @@ class MCPBridge {
                                 // const wsUrl = 'ws://localhost:8080/mcp';
                 // this.wsConnection = new WebSocket(wsUrl);
                 // this.setupWebSocketHandlers();
-                console.log('MCP Bridge: WebSocket не настроен, используем placeholder режим');
+                console.log('MCP Bridge: WebSocket not configured, using placeholder mode');
             } catch (e) {
-                console.warn('MCP Bridge: Не удалось подключиться через WebSocket:', e);
+                console.warn('MCP Bridge: Failed to connect via WebSocket:', e);
             }
         }
 
-                console.log('MCP Bridge: Работает в placeholder режиме');
+                console.log('MCP Bridge: Running in placeholder mode');
         return false;
     }
 
@@ -90,7 +90,7 @@ class MCPBridge {
                 });
             }
         } catch (error) {
-            console.error('MCP Bridge: Ошибка генерации изображения:', error);
+            console.error('MCP Bridge: Image generation error:', error);
             return null;
         }
 
@@ -102,17 +102,17 @@ class MCPBridge {
         if (!this.wsConnection) return;
 
         this.wsConnection.onopen = () => {
-            console.log('MCP Bridge: WebSocket соединение установлено');
+            console.log('MCP Bridge: WebSocket connection established');
             this.isConnected = true;
         };
 
         this.wsConnection.onerror = (error) => {
-            console.error('MCP Bridge: WebSocket ошибка:', error);
+            console.error('MCP Bridge: WebSocket error:', error);
             this.isConnected = false;
         };
 
         this.wsConnection.onclose = () => {
-            console.log('MCP Bridge: WebSocket соединение закрыто');
+            console.log('MCP Bridge: WebSocket connection closed');
             this.isConnected = false;
         };
     }

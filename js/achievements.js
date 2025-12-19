@@ -123,7 +123,7 @@ class Achievements {
                 stats: this.stats
             }));
         } catch (e) {
-            console.error('Ошибка сохранения достижений:', e);
+            console.error('Error saving achievements:', e);
         }
     }
 
@@ -137,7 +137,7 @@ class Achievements {
                 this.stats = { ...this.stats, ...data.stats };
             }
         } catch (e) {
-            console.error('Ошибка загрузки достижений:', e);
+            console.error('Error loading achievements:', e);
         }
     }
 

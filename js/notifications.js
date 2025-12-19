@@ -4,7 +4,7 @@ class NotificationSystem {
     constructor() {
         this.container = document.getElementById('notification-container');
         if (!this.container) {
-            console.warn('Контейнер уведомлений не найден');
+            console.warn('Notification container not found');
         }
     }
 
@@ -105,7 +105,7 @@ class ConfirmSystem {
         this.noBtn = document.getElementById('confirm-no');
         
         if (!this.modal) {
-            console.warn('Модальное окно подтверждения не найдено');
+            console.warn('Confirmation modal not found');
             return;
         }
 
