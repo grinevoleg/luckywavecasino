@@ -1,5 +1,5 @@
 /**
- * Движок визуальной новеллы
+ * Visual novel engine
  */
 
 class NovelEngine {
@@ -19,11 +19,11 @@ class NovelEngine {
         this.monetization = null;
         
         this.isTyping = false;
-        this.typingSpeed = 30; // мс на символ
+        this.typingSpeed = 30; // ms per character
     }
 
     /**
-     * Инициализирует движок
+     * Initialize engine
      */
     init(imageGenerator, casinoGames, monetization, inventory, achievements) {
         this.imageGenerator = imageGenerator;
@@ -34,24 +34,24 @@ class NovelEngine {
     }
 
     /**
-     * Загружает главу
+     * Load chapter
      */
     async loadChapter(chapterId, storyData) {
         const chapter = storyData.getChapter(chapterId);
         if (!chapter) {
-            console.error('Глава не найдена:', chapterId);
+            console.error('Chapter not found:', chapterId);
             return false;
         }
 
         this.currentChapter = chapter;
         this.gameState.currentChapter = chapterId;
 
-        // Предзагрузка изображений
+        // Preload images
         if (this.imageGenerator) {
             await this.imageGenerator.preloadChapterImages(chapter);
         }
 
-        // Загружаем первую сцену
+        // Load first scene
         if (chapter.scenes.length > 0) {
             await this.loadScene(chapter.scenes[0].sceneId, storyData);
         }
@@ -60,12 +60,12 @@ class NovelEngine {
     }
 
     /**
-     * Загружает сцену
+     * Load scene
      */
     async loadScene(sceneId, storyData) {
         const scene = storyData.getScene(this.currentChapter.chapterId, sceneId);
         if (!scene) {
-            console.error('Сцена не найдена:', sceneId);
+            console.error('Scene not found:', sceneId);
             return false;
         }
 
@@ -77,92 +77,92 @@ class NovelEngine {
             this.gameState.visitedScenes.push(sceneId);
         }
 
-        console.log('Загрузка сцены:', sceneId);
-        console.log('Фон:', scene.background);
-        console.log('Персонажи:', scene.characters);
-        console.log('Диалоги:', scene.dialogues?.length || 0);
+        console.log('Loading scene:', sceneId);
+        console.log('Background:', scene.background);
+        console.log('Characters:', scene.characters);
+        console.log('Dialogues:', scene.dialogues?.length || 0);
 
-        // Загружаем фон
+        // Load background
         await this.loadBackground(scene.background);
 
-        // Загружаем персонажей
+        // Load characters
         await this.loadCharacters(scene.characters);
 
-        // Небольшая задержка для загрузки изображений
+        // Small delay for image loading
         await new Promise(resolve => setTimeout(resolve, 100));
 
-        // Показываем диалоги
-        console.log('Показ диалогов...');
+        // Show dialogues
+        console.log('Showing dialogues...');
         this.showDialogue();
 
         return true;
     }
 
     /**
-     * Загружает фоновое изображение
+     * Load background image
      */
     async loadBackground(backgroundName) {
         if (!backgroundName) {
-            console.warn('Название фона не указано');
+            console.warn('Background name not specified');
             return;
         }
 
         const backgroundEl = document.getElementById('scene-background');
         if (!backgroundEl) {
-            console.error('Элемент фона не найден!');
+            console.error('Background element not found!');
             return;
         }
 
         try {
-            // Генерируем или загружаем изображение фона
+            // Generate or load background image
             let bgUrl;
             if (this.imageGenerator) {
                 bgUrl = await this.imageGenerator.generateBackgroundImage(backgroundName);
             } else {
-                // Placeholder если генератор не доступен
+                // Placeholder if generator not available
                 bgUrl = `assets/images/backgrounds/${backgroundName}.jpg`;
             }
 
             if (bgUrl) {
                 backgroundEl.style.backgroundImage = `url(${bgUrl})`;
                 backgroundEl.classList.add('fade-in');
-                console.log('Фон загружен:', backgroundName, bgUrl);
+                console.log('Background loaded:', backgroundName, bgUrl);
             } else {
-                console.error('Не удалось получить URL фона');
+                console.error('Failed to get background URL');
             }
         } catch (e) {
-            console.error('Ошибка загрузки фона:', e);
+            console.error('Error loading background:', e);
         }
     }
 
     /**
-     * Загружает персонажей
-     * Персонажи остаются одними и теми же между сценами (не меняются)
+     * Load characters
+     * Characters remain the same between scenes (don't change)
      */
     async loadCharacters(characters) {
         const container = document.getElementById('characters-container');
         if (!container) {
-            console.error('Контейнер персонажей не найден!');
+            console.error('Characters container not found!');
             return;
         }
 
         if (!characters || characters.length === 0) {
-            console.log('Нет персонажей для отображения');
-            // Очищаем только если нужно скрыть всех персонажей
+            console.log('No characters to display');
+            // Clear only if we need to hide all characters
             container.innerHTML = '';
             return;
         }
 
-        console.log('Загрузка персонажей:', characters.length);
+        console.log('Loading characters:', characters.length);
 
-        // Проверяем какие персонажи уже отображаются
+        // Check which characters are already displayed
         const existingCharacters = new Set();
         container.querySelectorAll('.character').forEach(el => {
             const charId = el.id.replace('character-', '');
             existingCharacters.add(charId);
         });
 
-        // Удаляем персонажей, которых больше нет в сцене
+        // Remove characters that are no longer in the scene
         const currentCharacterNames = new Set(characters.map(c => c.name));
         existingCharacters.forEach(charId => {
             if (!currentCharacterNames.has(charId)) {
@@ -173,61 +173,61 @@ class NovelEngine {
             }
         });
 
-        // Добавляем или обновляем персонажей
+        // Add or update characters
         for (const char of characters) {
             let charEl = document.getElementById(`character-${char.name}`);
             
-            // Если персонаж уже есть, только обновляем позицию
+            // If character already exists, only update position
             if (charEl) {
-                // Обновляем позицию если изменилась
+                // Update position if changed
                 const newPosition = char.position || 'center';
                 charEl.className = `character ${newPosition}`;
-                console.log('Персонаж уже отображается, обновлена позиция:', char.name, newPosition);
+                console.log('Character already displayed, position updated:', char.name, newPosition);
                 continue;
             }
 
-            // Создаем новый элемент персонажа
+            // Create new character element
             charEl = document.createElement('div');
             charEl.className = `character ${char.position || 'center'}`;
             charEl.id = `character-${char.name}`;
 
             try {
-                // Используем только имя персонажа без эмоции для единообразия
+                // Use only character name without emotion for consistency
                 let charUrl;
                 if (this.imageGenerator) {
-                    // Всегда используем базовую версию персонажа (без эмоции)
+                    // Always use base version of character (without emotion)
                     charUrl = await this.imageGenerator.generateCharacterImage(
                         char.name,
-                        'base', // Базовая версия без эмоций
+                        'base', // Base version without emotions
                         char.position || 'center'
                     );
                 } else {
-                    // Используем базовую версию или первую доступную
+                    // Use base version or first available
                     charUrl = `assets/images/characters/${char.name}_base.png`;
                 }
 
-                // Если URL не получен, пробуем альтернативные пути
+                // If URL not received, try alternative paths
                 if (!charUrl) {
-                    console.warn('URL персонажа не получен, пробуем альтернативные пути:', char.name);
+                    console.warn('Character URL not received, trying alternative paths:', char.name);
                     const altPaths = [
                         `assets/images/characters/${char.name}.png`,
                         `assets/images/characters/${char.name}_base.png`,
                         `assets/images/characters/${char.name}_neutral.png`,
                         `assets/images/characters/${char.name}_confident.png`
                     ];
-                    charUrl = altPaths[0]; // Используем первый как fallback
+                    charUrl = altPaths[0]; // Use first as fallback
                 }
 
                 const img = document.createElement('img');
                 img.src = charUrl;
                 img.alt = char.name;
-                img.style.objectFit = 'cover'; // Для круглой рамки используем cover
+                img.style.objectFit = 'cover'; // Use cover for round frame
                 img.style.objectPosition = 'center';
                 img.style.width = '100%';
                 img.style.height = '100%';
                 img.style.display = 'block';
                 
-                // Обработка ошибок загрузки
+                // Handle loading errors
                 let errorCount = 0;
                 const altPaths = [
                     `assets/images/characters/${char.name}.png`,
@@ -238,49 +238,49 @@ class NovelEngine {
                 
                 img.onerror = () => {
                     errorCount++;
-                    console.error(`Ошибка загрузки изображения персонажа (попытка ${errorCount}):`, charUrl);
+                    console.error(`Error loading character image (attempt ${errorCount}):`, charUrl);
                     
                     if (errorCount < altPaths.length) {
-                        // Пробуем следующий альтернативный путь
+                        // Try next alternative path
                         const nextPath = altPaths[errorCount];
                         if (nextPath !== charUrl) {
-                            console.log('Пробуем альтернативный путь:', nextPath);
+                            console.log('Trying alternative path:', nextPath);
                             img.src = nextPath;
                         }
                     } else {
-                        console.error('Все пути не сработали для персонажа:', char.name);
-                        // Можно добавить placeholder изображение
+                        console.error('All paths failed for character:', char.name);
+                        // Can add placeholder image
                     }
                 };
                 
                 img.onload = () => {
-                    console.log('Персонаж успешно загружен:', char.name, img.src);
+                    console.log('Character loaded successfully:', char.name, img.src);
                 };
                 
                 charEl.appendChild(img);
                 container.appendChild(charEl);
 
-                // Анимация появления
+                // Appearance animation
                 setTimeout(() => {
                     charEl.classList.add('active');
                 }, 100);
             } catch (e) {
-                console.error('Ошибка загрузки персонажа:', e);
+                console.error('Error loading character:', e);
             }
         }
     }
 
     /**
-     * Показывает диалог
+     * Show dialogue
      */
     showDialogue() {
         if (!this.currentScene) {
-            console.error('Текущая сцена не установлена');
+            console.error('Current scene not set');
             return;
         }
 
         if (!this.currentScene.dialogues || this.currentScene.dialogues.length === 0) {
-            console.warn('Нет диалогов в сцене, показываем выборы');
+            console.warn('No dialogues in scene, showing choices');
             this.showChoicesOrMinigame();
             return;
         }
@@ -288,7 +288,7 @@ class NovelEngine {
         const dialogues = this.currentScene.dialogues;
         
         if (this.currentDialogueIndex >= dialogues.length) {
-            // Диалоги закончились, показываем выборы или мини-игру
+            // Dialogues ended, show choices or minigame
             this.showChoicesOrMinigame();
             return;
         }
@@ -298,10 +298,10 @@ class NovelEngine {
     }
 
     /**
-     * Отображает один диалог
+     * Display one dialogue
      */
     displayDialogue(dialogue) {
-        console.log('Отображение диалога:', dialogue);
+        console.log('Displaying dialogue:', dialogue);
         
         const speakerEl = document.getElementById('speaker-name');
         const textEl = document.getElementById('dialogue-text');
@@ -309,7 +309,7 @@ class NovelEngine {
         const choicesContainer = document.getElementById('choices-container');
         const dialogueBox = document.getElementById('dialogue-box');
 
-        console.log('Элементы диалога:', {
+        console.log('Dialogue elements:', {
             speakerEl: !!speakerEl,
             textEl: !!textEl,
             nextBtn: !!nextBtn,
@@ -318,23 +318,23 @@ class NovelEngine {
         });
 
         if (!speakerEl || !textEl) {
-            console.error('Элементы диалога не найдены!');
+            console.error('Dialogue elements not found!');
             console.error('speakerEl:', speakerEl);
             console.error('textEl:', textEl);
             return;
         }
 
-        // Убеждаемся, что диалоговое окно видно
+        // Make sure dialogue box is visible
         if (dialogueBox) {
             dialogueBox.style.display = 'flex';
         }
 
-        // Скрываем выборы при показе диалога
+        // Hide choices when showing dialogue
         if (choicesContainer) {
             choicesContainer.innerHTML = '';
         }
 
-        // Устанавливаем имя говорящего
+        // Set speaker name
         if (dialogue.speaker === 'narrator') {
             speakerEl.textContent = '';
             speakerEl.className = 'speaker-name narrator';
@@ -343,21 +343,21 @@ class NovelEngine {
             speakerEl.className = 'speaker-name';
         }
 
-        console.log('Имя говорящего установлено:', speakerEl.textContent || '(narrator)');
+        console.log('Speaker name set:', speakerEl.textContent || '(narrator)');
 
-        // Анимация печатания текста
+        // Typing animation
         this.typeText(textEl, dialogue.text, () => {
-            console.log('Текст напечатан, показываем кнопку "Далее"');
+            console.log('Text typed, showing Next button');
             if (nextBtn) {
                 nextBtn.classList.remove('hidden');
             }
         });
 
-        // Обработчик кнопки "Далее"
+        // Next button handler
         const handleNext = () => {
-            console.log('Клик по кнопке "Далее", переход к следующему диалогу');
+            console.log('Next button clicked, moving to next dialogue');
             if (nextBtn) {
-                nextBtn.onclick = null; // Очищаем предыдущий обработчик
+                nextBtn.onclick = null; // Clear previous handler
                 nextBtn.classList.add('hidden');
             }
             this.currentDialogueIndex++;
@@ -366,14 +366,14 @@ class NovelEngine {
 
         if (nextBtn) {
             nextBtn.onclick = handleNext;
-            console.log('Обработчик кнопки "Далее" установлен');
+            console.log('Next button handler set');
         } else {
-            console.error('Кнопка "Далее" не найдена!');
+            console.error('Next button not found!');
         }
     }
 
     /**
-     * Анимация печатания текста
+     * Typing animation
      */
     typeText(element, text, onComplete) {
         if (this.isTyping) return;
@@ -399,45 +399,45 @@ class NovelEngine {
     }
 
     /**
-     * Получает отображаемое имя персонажа
+     * Get character display name
      */
     getCharacterDisplayName(name) {
         const names = {
-            'hero': 'Вы',
-            'bartender': 'Бармен',
-            'dealer': 'Дилер'
+            'hero': 'You',
+            'bartender': 'Bartender',
+            'dealer': 'Dealer'
         };
         return names[name] || name;
     }
 
     /**
-     * Показывает выборы или мини-игру
+     * Show choices or minigame
      */
     showChoicesOrMinigame() {
-        // Проверяем, есть ли мини-игра
+        // Check if there's a minigame
         if (this.currentScene.minigame) {
             this.startMinigame(this.currentScene.minigame);
             return;
         }
 
-        // Показываем выборы
+        // Show choices
         if (this.currentScene.choices && this.currentScene.choices.length > 0) {
             this.showChoices(this.currentScene.choices);
         } else {
-            // Нет выборов и нет мини-игры - показываем кнопку продолжения
+            // No choices and no minigame - show continue button
             const nextBtn = document.getElementById('btn-next');
             if (nextBtn) {
                 nextBtn.classList.remove('hidden');
                 nextBtn.onclick = () => {
-                    // Переход к следующей сцене по умолчанию или завершение главы
-                    console.log('Сцена завершена');
+                    // Transition to next scene by default or chapter completion
+                    console.log('Scene completed');
                 };
             }
         }
     }
 
     /**
-     * Показывает выборы
+     * Show choices
      */
     showChoices(choices) {
         const container = document.getElementById('choices-container');
@@ -450,23 +450,23 @@ class NovelEngine {
             btn.className = 'choice-btn';
             btn.textContent = choice.text;
 
-            // Проверяем требования
+            // Check requirements
             if (choice.required === 'key' && this.inventory && !this.inventory.hasItem('key')) {
                 btn.classList.add('locked');
                 btn.onclick = () => {
                     if (window.notifications) {
-                        window.notifications.warning('Для этого выбора нужен ключ!', 'Недостаточно ресурсов');
+                        window.notifications.warning('This choice requires a key!', 'Insufficient resources');
                     }
                 };
             } else if (choice.required === 'ticket' && this.inventory && !this.inventory.hasItem('ticket')) {
                 btn.classList.add('locked');
                 btn.onclick = () => {
                     if (window.notifications) {
-                        window.notifications.warning('Для этого выбора нужен билет!', 'Недостаточно ресурсов');
+                        window.notifications.warning('This choice requires a ticket!', 'Insufficient resources');
                     }
                 };
             } else {
-                // Премиум выбор
+                // Premium choice
                 if (choice.premium) {
                     btn.classList.add('premium');
                 }
@@ -481,34 +481,34 @@ class NovelEngine {
     }
 
     /**
-     * Обрабатывает выбор игрока
+     * Handle player choice
      */
     async handleChoice(choice, index) {
-        // Сохраняем выбор
+        // Save choice
         this.gameState.choices.push({
             scene: this.currentScene.sceneId,
             choice: index,
             text: choice.text
         });
 
-        // Используем ресурсы если нужно
+        // Use resources if needed
         if (choice.required === 'key' && this.inventory) {
             this.inventory.useItem('key');
         } else if (choice.required === 'ticket' && this.inventory) {
             this.inventory.useItem('ticket');
         }
         
-        // Обновляем статистику
+        // Update statistics
         if (this.achievements) {
             this.achievements.updateStat('choices_made');
         }
 
-        // Переходим к следующей сцене
+        // Transition to next scene
         if (choice.nextScene) {
             if (choice.nextScene === 'main_menu') {
                 this.returnToMainMenu();
             } else {
-                // Получаем storyData из глобального объекта
+                // Get storyData from global object
                 const storyData = window.storyData;
                 if (storyData) {
                     await this.loadScene(choice.nextScene, storyData);
@@ -518,14 +518,14 @@ class NovelEngine {
     }
 
     /**
-     * Запускает мини-игру
+     * Start minigame
      */
     startMinigame(gameType) {
-        // Переключаемся на экран мини-игры
+        // Switch to minigame screen
         document.getElementById('game-screen').classList.remove('active');
         document.getElementById('minigame-screen').classList.add('active');
 
-        // Инициализируем игру
+        // Initialize game
         if (this.casinoGames) {
             this.casinoGames.initGame(
                 gameType,
@@ -538,14 +538,14 @@ class NovelEngine {
     }
 
     /**
-     * Обрабатывает завершение мини-игры
+     * Handle minigame completion
      */
     async onMinigameComplete(result) {
-        // Обновляем статистику и достижения
+        // Update statistics and achievements
         if (this.achievements) {
             if (result === 'win' || result === 'jackpot') {
                 this.achievements.updateStat('games_won');
-                // Определяем тип игры и обновляем соответствующую статистику
+                // Determine game type and update corresponding statistics
                 if (this.currentScene.minigame === 'blackjack') {
                     this.achievements.updateStat('blackjack_wins');
                 } else if (this.currentScene.minigame === 'slots') {
@@ -564,22 +564,22 @@ class NovelEngine {
             }
         }
 
-        // Возвращаемся к экрану игры
+        // Return to game screen
         document.getElementById('minigame-screen').classList.remove('active');
         document.getElementById('game-screen').classList.add('active');
 
-        // Проверяем, есть ли обработчик результата
+        // Check if there's a result handler
         if (this.currentScene.onMinigameComplete) {
             const handler = this.currentScene.onMinigameComplete[result];
             if (handler) {
-                // Показываем диалоги после мини-игры
+                // Show dialogues after minigame
                 if (handler.dialogues) {
                     this.currentScene.dialogues = handler.dialogues;
                     this.currentDialogueIndex = 0;
                     this.showDialogue();
                 }
 
-                // Переходим к следующей сцене если указана
+                // Transition to next scene if specified
                 if (handler.sceneId) {
                     const storyData = window.storyData;
                     if (storyData) {
@@ -591,7 +591,7 @@ class NovelEngine {
     }
 
     /**
-     * Возвращается в главное меню
+     * Return to main menu
      */
     returnToMainMenu() {
         document.getElementById('game-screen').classList.remove('active');
@@ -599,7 +599,7 @@ class NovelEngine {
     }
 
     /**
-     * Получает текущее состояние игры
+     * Get current game state
      */
     getGameState() {
         return {
@@ -609,7 +609,7 @@ class NovelEngine {
     }
 
     /**
-     * Загружает состояние игры
+     * Load game state
      */
     async loadGameState(gameState, storyData) {
         this.gameState = gameState;
@@ -625,6 +625,6 @@ class NovelEngine {
     }
 }
 
-// Экспорт
+// Export
 window.NovelEngine = NovelEngine;
 

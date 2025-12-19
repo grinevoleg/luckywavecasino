@@ -1,5 +1,5 @@
 /**
- * Мини-игры казино: блэкджек, слоты, покер
+ * Casino mini-games: blackjack, slots, poker
  */
 
 class CasinoGames {
@@ -9,7 +9,7 @@ class CasinoGames {
     }
 
     /**
-     * Инициализирует мини-игру
+     * Initialize minigame
      */
     initGame(gameType, containerId, onComplete) {
         this.currentGame = gameType;
@@ -18,7 +18,7 @@ class CasinoGames {
         
         const container = document.getElementById(containerId);
         if (!container) {
-            console.error('Контейнер для мини-игры не найден:', containerId);
+            console.error('Minigame container not found:', containerId);
             return;
         }
 
@@ -35,31 +35,31 @@ class CasinoGames {
                 this.initPoker(container);
                 break;
             default:
-                console.error('Неизвестный тип игры:', gameType);
+                console.error('Unknown game type:', gameType);
         }
     }
 
     /**
-     * Блэкджек
+     * Blackjack
      */
     initBlackjack(container) {
         container.innerHTML = `
-            <h2 class="minigame-title">Блэкджек</h2>
-            <p class="minigame-instructions">Наберите 21 очко или максимально близко к этому числу, не превышая его</p>
+            <h2 class="minigame-title">Blackjack</h2>
+            <p class="minigame-instructions">Get 21 points or as close as possible without exceeding it</p>
             <div class="blackjack-table">
                 <div class="blackjack-hand">
-                    <div class="hand-label">Дилер</div>
+                    <div class="hand-label">Dealer</div>
                     <div class="hand-cards" id="dealer-hand"></div>
                     <div class="hand-value" id="dealer-value"></div>
                 </div>
                 <div class="blackjack-hand">
-                    <div class="hand-label">Вы</div>
+                    <div class="hand-label">You</div>
                     <div class="hand-cards" id="player-hand"></div>
                     <div class="hand-value" id="player-value"></div>
                 </div>
                 <div class="blackjack-controls">
-                    <button class="casino-btn" id="btn-hit">Взять карту</button>
-                    <button class="casino-btn" id="btn-stand">Остановиться</button>
+                    <button class="casino-btn" id="btn-hit">Hit</button>
+                    <button class="casino-btn" id="btn-stand">Stand</button>
                 </div>
                 <div class="blackjack-result" id="blackjack-result"></div>
             </div>
@@ -73,11 +73,11 @@ class CasinoGames {
             gameOver: false
         };
 
-        // Раздаем начальные карты
+        // Deal initial cards
         this.dealCard('player');
         this.dealCard('dealer');
         this.dealCard('player');
-        this.dealCard('dealer', true); // Скрытая карта дилера
+        this.dealCard('dealer', true); // Dealer's hidden card
 
         this.updateBlackjackDisplay();
         this.setupBlackjackHandlers();
@@ -138,7 +138,7 @@ class CasinoGames {
             }
         }
 
-        // Обрабатываем тузы
+        // Handle aces
         while (value > 21 && aces > 0) {
             value -= 10;
             aces--;
@@ -153,21 +153,21 @@ class CasinoGames {
         const dealerValueEl = document.getElementById('dealer-value');
         const playerValueEl = document.getElementById('player-value');
 
-        // Дилер
+        // Dealer
         dealerHandEl.innerHTML = '';
         this.blackjack.dealerHand.forEach(card => {
             const cardEl = this.createCardElement(card);
             dealerHandEl.appendChild(cardEl);
         });
-        dealerValueEl.textContent = this.blackjack.dealerHidden ? '?' : `Очки: ${this.calculateHandValue(this.blackjack.dealerHand)}`;
+        dealerValueEl.textContent = this.blackjack.dealerHidden ? '?' : `Points: ${this.calculateHandValue(this.blackjack.dealerHand)}`;
 
-        // Игрок
+        // Player
         playerHandEl.innerHTML = '';
         this.blackjack.playerHand.forEach(card => {
             const cardEl = this.createCardElement(card);
             playerHandEl.appendChild(cardEl);
         });
-        playerValueEl.textContent = `Очки: ${this.calculateHandValue(this.blackjack.playerHand)}`;
+        playerValueEl.textContent = `Points: ${this.calculateHandValue(this.blackjack.playerHand)}`;
     }
 
     createCardElement(card) {
@@ -210,7 +210,7 @@ class CasinoGames {
         this.blackjack.gameOver = true;
         this.blackjack.dealerHidden = false;
         
-        // Дилер берет карты до 17
+        // Dealer draws cards until 17
         while (this.calculateHandValue(this.blackjack.dealerHand) < 17) {
             this.dealCard('dealer');
         }
@@ -233,23 +233,23 @@ class CasinoGames {
 
         const resultEl = document.getElementById('blackjack-result');
         if (finalResult === 'win') {
-            resultEl.textContent = '🎉 Вы выиграли!';
+            resultEl.textContent = '🎉 You won!';
             resultEl.style.color = '#4CAF50';
         } else if (finalResult === 'draw') {
-            resultEl.textContent = '🤝 Ничья!';
+            resultEl.textContent = '🤝 Draw!';
             resultEl.style.color = '#FFC107';
         } else {
-            resultEl.textContent = '😔 Вы проиграли';
+            resultEl.textContent = '😔 You lost';
             resultEl.style.color = '#f44336';
         }
 
         this.gameResult = finalResult;
         
-        // Отключаем кнопки
+        // Disable buttons
         document.getElementById('btn-hit').disabled = true;
         document.getElementById('btn-stand').disabled = true;
 
-        // Вызываем callback через 2 секунды
+        // Call callback after 2 seconds
         setTimeout(() => {
             if (this.onComplete) {
                 this.onComplete(finalResult);
@@ -258,12 +258,12 @@ class CasinoGames {
     }
 
     /**
-     * Слоты
+     * Slots
      */
     initSlots(container) {
         container.innerHTML = `
-            <h2 class="minigame-title">Слот-машина</h2>
-            <p class="minigame-instructions">Соберите выигрышную комбинацию для взлома системы</p>
+            <h2 class="minigame-title">Slot Machine</h2>
+            <p class="minigame-instructions">Match winning symbols to hack the system</p>
             <div class="slots-machine">
                 <div class="slots-reels" id="slots-reels">
                     <div class="reel" id="reel-1">
@@ -283,7 +283,7 @@ class CasinoGames {
                     </div>
                 </div>
                 <div class="slots-controls">
-                    <button class="spin-btn" id="btn-spin">КРУТИТЬ</button>
+                    <button class="spin-btn" id="btn-spin">SPIN</button>
                 </div>
                 <div class="slots-result" id="slots-result"></div>
             </div>
@@ -295,7 +295,7 @@ class CasinoGames {
             spinning: false
         };
 
-        // Инициализируем символы в барабанах
+        // Initialize symbols in reels
         this.initReelSymbols();
         this.setupSlotsHandlers();
     }
@@ -308,7 +308,7 @@ class CasinoGames {
             const symbols = this.slots.symbols;
             symbolsContainer.innerHTML = '';
             
-            // Добавляем символы (по 10 копий для плавной прокрутки)
+            // Add symbols (10 copies for smooth scrolling)
             for (let j = 0; j < 10; j++) {
                 symbols.forEach((symbol) => {
                     const symbolEl = document.createElement('div');
@@ -318,7 +318,7 @@ class CasinoGames {
                 });
             }
             
-            // Устанавливаем начальную позицию
+            // Set initial position
             const randomStart = Math.floor(Math.random() * symbols.length) * 160;
             symbolsContainer.style.transform = `translateY(-${randomStart}px)`;
             symbolsContainer.style.transition = 'none';
@@ -360,22 +360,22 @@ class CasinoGames {
         const symbolHeight = 160;
         const symbolsCount = this.slots.symbols.length;
         
-        // Начинаем вращение всех барабанов
+        // Start spinning all reels
         reels.forEach((reel, index) => {
             reel.classList.add('spinning');
             const container = symbolsContainers[index];
             
             if (container) {
-                // Выбираем финальный символ
+                // Select final symbol
                 const finalSymbol = this.slots.symbols[Math.floor(Math.random() * symbolsCount)];
                 this.slots.reels[index] = finalSymbol;
                 const symbolIndex = this.slots.symbols.indexOf(finalSymbol);
                 
-                // Текущая позиция
+                // Current position
                 let currentY = this.getCurrentYPosition(container);
                 if (isNaN(currentY) || currentY < 0) currentY = 0;
                 
-                // Быстрая прокрутка с видимыми символами
+                // Fast scrolling with visible symbols
                 container.style.transition = 'none';
                 
                 let spinOffset = 0;
@@ -390,7 +390,7 @@ class CasinoGames {
                 
                 reel.dataset.spinInterval = spinInterval;
                 
-                // Останавливаем на нужном символе
+                // Stop on target symbol
                 setTimeout(() => {
                     clearInterval(spinInterval);
                     const targetY = currentY + spinOffset + (symbolIndex * symbolHeight);
@@ -400,7 +400,7 @@ class CasinoGames {
             }
         });
 
-        // Останавливаем каждый барабан с задержкой
+        // Stop each reel with delay
         const stopTimes = [1200, 1600, 2000];
 
         stopTimes.forEach((time, index) => {
@@ -460,41 +460,41 @@ class CasinoGames {
             document.getElementById('reel-3')
         ];
         
-        // Проверяем выигрышные комбинации
+        // Check winning combinations
         if (a === b && b === c) {
-            // Эффект выигрыша на барабанах
+            // Win effect on reels
             reels.forEach(reel => {
                 reel.classList.add('win');
             });
             
             if (a === '💎') {
-                resultEl.innerHTML = '🎉 <span>ДЖЕКПОТ!</span> Система взломана!';
+                resultEl.innerHTML = '🎉 <span>JACKPOT!</span> System hacked!';
                 resultEl.style.color = '#FFD700';
                 resultEl.style.borderColor = '#FFD700';
                 resultEl.style.boxShadow = '0 0 30px rgba(255, 215, 0, 0.6)';
                 this.gameResult = 'jackpot';
             } else {
-                resultEl.innerHTML = '🎊 <span>Выигрыш!</span> Комбинация собрана!';
+                resultEl.innerHTML = '🎊 <span>Win!</span> Combination matched!';
                 resultEl.style.color = '#4CAF50';
                 resultEl.style.borderColor = '#4CAF50';
                 resultEl.style.boxShadow = '0 0 30px rgba(76, 175, 80, 0.6)';
                 this.gameResult = 'win';
             }
         } else if (a === b || b === c || a === c) {
-            resultEl.innerHTML = '✨ <span>Почти!</span> Попробуйте еще раз';
+            resultEl.innerHTML = '✨ <span>Almost!</span> Try again';
             resultEl.style.color = '#FFC107';
             resultEl.style.borderColor = '#FFC107';
             resultEl.style.boxShadow = '0 0 20px rgba(255, 193, 7, 0.4)';
             this.gameResult = 'partial';
         } else {
-            resultEl.innerHTML = '😔 <span>Не повезло.</span> Попробуйте еще раз';
+            resultEl.innerHTML = '😔 <span>No luck.</span> Try again';
             resultEl.style.color = '#f44336';
             resultEl.style.borderColor = '#f44336';
             resultEl.style.boxShadow = '0 0 20px rgba(244, 67, 54, 0.4)';
             this.gameResult = 'lose';
         }
 
-        // Если джекпот или выигрыш, завершаем игру
+        // If jackpot or win, complete the game
         if (this.gameResult === 'jackpot' || this.gameResult === 'win') {
             setTimeout(() => {
                 if (this.onComplete) {
@@ -505,22 +505,22 @@ class CasinoGames {
     }
 
     /**
-     * Покер (упрощенный)
+     * Poker (simplified)
      */
     initPoker(container) {
         container.innerHTML = `
-            <h2 class="minigame-title">Покер</h2>
-            <p class="minigame-instructions">Соберите лучшую комбинацию карт</p>
+            <h2 class="minigame-title">Poker</h2>
+            <p class="minigame-instructions">Make the best card combination</p>
             <div class="poker-table">
                 <div class="poker-community-cards" id="community-cards"></div>
                 <div class="poker-player-hand">
-                    <div class="hand-label">Ваши карты</div>
+                    <div class="hand-label">Your Cards</div>
                     <div class="hand-cards" id="poker-hand"></div>
                 </div>
                 <div class="poker-controls">
                     <input type="number" class="poker-bet-input" id="poker-bet" value="100" min="10" step="10">
-                    <button class="casino-btn" id="btn-call">Колл</button>
-                    <button class="casino-btn" id="btn-fold">Фолд</button>
+                    <button class="casino-btn" id="btn-call">Call</button>
+                    <button class="casino-btn" id="btn-fold">Fold</button>
                 </div>
                 <div class="poker-result" id="poker-result"></div>
             </div>
@@ -533,7 +533,7 @@ class CasinoGames {
             gameOver: false
         };
 
-        // Раздаем карты
+        // Deal cards
         for (let i = 0; i < 2; i++) {
             this.poker.playerHand.push(this.poker.deck.pop());
         }
@@ -580,18 +580,18 @@ class CasinoGames {
         const resultEl = document.getElementById('poker-result');
         
         if (action === 'fold') {
-            resultEl.textContent = 'Вы сбросили карты';
+            resultEl.textContent = 'You folded';
             resultEl.style.color = '#f44336';
             this.gameResult = 'lose';
         } else {
-            // Упрощенная логика: случайный результат
+            // Simplified logic: random result
             const win = Math.random() > 0.4;
             if (win) {
-                resultEl.textContent = '🎉 Вы выиграли раунд!';
+                resultEl.textContent = '🎉 You won the round!';
                 resultEl.style.color = '#4CAF50';
                 this.gameResult = 'win';
             } else {
-                resultEl.textContent = '😔 Вы проиграли раунд';
+                resultEl.textContent = '😔 You lost the round';
                 resultEl.style.color = '#f44336';
                 this.gameResult = 'lose';
             }
@@ -608,13 +608,13 @@ class CasinoGames {
     }
 
     /**
-     * Получает результат последней игры
+     * Get last game result
      */
     getResult() {
         return this.gameResult;
     }
 }
 
-// Экспорт
+// Export
 window.CasinoGames = CasinoGames;
 

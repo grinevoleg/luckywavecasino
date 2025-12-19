@@ -1,5 +1,5 @@
 /**
- * Поддержка мобильных устройств (iPhone)
+ * Mobile device support (iPhone)
  */
 
 class MobileSupport {
@@ -10,7 +10,7 @@ class MobileSupport {
     }
 
     /**
-     * Определяет мобильное устройство
+     * Detect mobile device
      */
     detectMobile() {
         return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ||
@@ -18,44 +18,44 @@ class MobileSupport {
     }
 
     /**
-     * Определяет iOS устройство
+     * Detect iOS device
      */
     detectIOS() {
         return /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
     }
 
     /**
-     * Инициализация мобильной поддержки
+     * Initialize mobile support
      */
     init() {
         if (this.isMobile) {
-            console.log('Мобильное устройство обнаружено');
+            console.log('Mobile device detected');
             this.setupMobileFeatures();
         }
 
         if (this.isIOS) {
-            console.log('iOS устройство обнаружено');
+            console.log('iOS device detected');
             this.setupIOSFeatures();
         }
 
-        // Обработка изменения ориентации
+        // Handle orientation change
         window.addEventListener('orientationchange', () => {
             setTimeout(() => {
                 this.handleOrientationChange();
             }, 100);
         });
 
-        // Обработка изменения размера окна
+        // Handle window resize
         window.addEventListener('resize', () => {
             this.handleResize();
         });
     }
 
     /**
-     * Настройка функций для мобильных устройств
+     * Setup mobile features
      */
     setupMobileFeatures() {
-        // Предотвращение двойного тапа для zoom
+        // Prevent double tap zoom
         let lastTouchEnd = 0;
         document.addEventListener('touchend', (event) => {
             const now = Date.now();
@@ -65,7 +65,7 @@ class MobileSupport {
             lastTouchEnd = now;
         }, false);
 
-        // Улучшенная обработка touch событий для кнопок
+        // Improved touch event handling for buttons
         document.querySelectorAll('button').forEach(btn => {
             btn.addEventListener('touchstart', function() {
                 this.style.opacity = '0.8';
@@ -79,10 +79,10 @@ class MobileSupport {
     }
 
     /**
-     * Настройка функций для iOS
+     * Setup iOS features
      */
     setupIOSFeatures() {
-        // Исправление высоты viewport на iOS
+        // Fix viewport height on iOS
         const setViewportHeight = () => {
             const vh = window.innerHeight * 0.01;
             document.documentElement.style.setProperty('--vh', `${vh}px`);
@@ -92,34 +92,34 @@ class MobileSupport {
         window.addEventListener('resize', setViewportHeight);
         window.addEventListener('orientationchange', setViewportHeight);
 
-        // Предотвращение bounce эффекта
+        // Prevent bounce effect
         document.body.addEventListener('touchmove', (e) => {
             if (e.target.closest('.dialogue-box') || 
                 e.target.closest('.choices-container') ||
                 e.target.closest('.minigame-container')) {
-                // Разрешаем скролл в контейнерах
+                // Allow scroll in containers
                 return;
             }
-            // Предотвращаем скролл страницы
+            // Prevent page scroll
             e.preventDefault();
         }, { passive: false });
     }
 
     /**
-     * Обработка изменения ориентации
+     * Handle orientation change
      */
     handleOrientationChange() {
-        console.log('Изменение ориентации');
-        // Обновляем размеры элементов
+        console.log('Orientation changed');
+        // Update element sizes
         const gameScreen = document.getElementById('game-screen');
         if (gameScreen && gameScreen.classList.contains('active')) {
-            // Пересчитываем позиции элементов
+            // Recalculate element positions
             this.updateLayout();
         }
     }
 
     /**
-     * Обработка изменения размера окна
+     * Handle window resize
      */
     handleResize() {
         if (this.isMobile) {
@@ -128,14 +128,14 @@ class MobileSupport {
     }
 
     /**
-     * Обновление layout для мобильных устройств
+     * Update layout for mobile devices
      */
     updateLayout() {
-        // Обновляем высоту viewport
+        // Update viewport height
         const vh = window.innerHeight * 0.01;
         document.documentElement.style.setProperty('--vh', `${vh}px`);
 
-        // Обновляем позиции элементов диалога
+        // Update dialogue element positions
         const dialogueBox = document.getElementById('dialogue-box');
         if (dialogueBox) {
             const safeAreaBottom = parseInt(getComputedStyle(document.documentElement).getPropertyValue('env(safe-area-inset-bottom)')) || 0;
@@ -144,7 +144,7 @@ class MobileSupport {
     }
 
     /**
-     * Получает информацию об устройстве
+     * Get device information
      */
     getDeviceInfo() {
         return {
@@ -157,14 +157,15 @@ class MobileSupport {
     }
 }
 
-// Инициализация при загрузке
+// Initialize on load
 let mobileSupport;
 document.addEventListener('DOMContentLoaded', () => {
     mobileSupport = new MobileSupport();
     window.mobileSupport = mobileSupport;
 });
 
-// Экспорт
+// Export
 window.MobileSupport = MobileSupport;
+
 
 

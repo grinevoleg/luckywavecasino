@@ -1,15 +1,15 @@
 /**
- * Система сохранений через LocalStorage
+ * Save system using LocalStorage
  */
 
 class SaveSystem {
     constructor() {
-        this.saveSlots = 10; // Количество слотов для сохранений
+        this.saveSlots = 10; // Number of save slots
         this.currentSaveSlot = null;
     }
 
     /**
-     * Сохраняет игру
+     * Save game
      */
     saveGame(slotIndex, gameState) {
         try {
@@ -24,18 +24,18 @@ class SaveSystem {
             const key = `lucky_wave_save_${slotIndex}`;
             localStorage.setItem(key, JSON.stringify(saveData));
             
-            // Сохраняем список всех сохранений
+            // Save list of all saves
             this.updateSaveList();
             
             return true;
         } catch (e) {
-            console.error('Ошибка сохранения игры:', e);
+            console.error('Error saving game:', e);
             return false;
         }
     }
 
     /**
-     * Загружает игру
+     * Load game
      */
     loadGame(slotIndex) {
         try {
@@ -50,13 +50,13 @@ class SaveSystem {
             this.currentSaveSlot = slotIndex;
             return parsed.gameState;
         } catch (e) {
-            console.error('Ошибка загрузки игры:', e);
+            console.error('Error loading game:', e);
             return null;
         }
     }
 
     /**
-     * Удаляет сохранение
+     * Delete save
      */
     deleteSave(slotIndex) {
         try {
@@ -65,13 +65,13 @@ class SaveSystem {
             this.updateSaveList();
             return true;
         } catch (e) {
-            console.error('Ошибка удаления сохранения:', e);
+            console.error('Error deleting save:', e);
             return false;
         }
     }
 
     /**
-     * Получает список всех сохранений
+     * Get all saves list
      */
     getAllSaves() {
         const saves = [];
@@ -88,7 +88,7 @@ class SaveSystem {
                         ...parsed
                     });
                 } catch (e) {
-                    console.warn('Ошибка парсинга сохранения:', i, e);
+                    console.warn('Error parsing save:', i, e);
                 }
             }
         }
@@ -97,7 +97,7 @@ class SaveSystem {
     }
 
     /**
-     * Генерирует превью для сохранения
+     * Generate save preview
      */
     generatePreview(gameState) {
         if (!gameState) return 'Empty Save';
@@ -109,7 +109,7 @@ class SaveSystem {
     }
 
     /**
-     * Обновляет список сохранений в LocalStorage
+     * Update saves list in LocalStorage
      */
     updateSaveList() {
         const saves = this.getAllSaves();
@@ -117,22 +117,22 @@ class SaveSystem {
     }
 
     /**
-     * Быстрое сохранение (автосохранение)
+     * Quick save (autosave)
      */
     quickSave(gameState) {
-        // Используем слот 0 для быстрого сохранения
+        // Use slot 0 for quick save
         return this.saveGame(0, gameState);
     }
 
     /**
-     * Быстрая загрузка
+     * Quick load
      */
     quickLoad() {
         return this.loadGame(0);
     }
 
     /**
-     * Проверяет наличие сохранений
+     * Check if saves exist
      */
     hasSaves() {
         for (let i = 0; i < this.saveSlots; i++) {
@@ -145,7 +145,7 @@ class SaveSystem {
     }
 
     /**
-     * Очищает все сохранения (осторожно!)
+     * Clear all saves (careful!)
      */
     clearAllSaves() {
         for (let i = 0; i < this.saveSlots; i++) {
@@ -156,6 +156,6 @@ class SaveSystem {
     }
 }
 
-// Экспорт
+// Export
 window.SaveSystem = SaveSystem;
 

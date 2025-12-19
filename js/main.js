@@ -1,8 +1,8 @@
 /**
- * Главный файл - точка входа в игру
+ * Main file - game entry point
  */
 
-// Глобальные объекты
+// Global objects
 let novelEngine;
 let storyData;
 let saveSystem;
@@ -13,13 +13,13 @@ let inventory;
 let achievements;
 
 /**
- * Инициализация игры
+ * Initialize game
  */
 async function initGame() {
-    console.log('Инициализация игры...');
+    console.log('Initializing game...');
     
     try {
-        // Создаем экземпляры классов
+        // Create class instances
         imageGenerator = new HFImageGenerator();
         casinoGames = new CasinoGames();
         saveSystem = new SaveSystem();
@@ -29,10 +29,10 @@ async function initGame() {
         storyData = new StoryData();
         novelEngine = new NovelEngine();
 
-        // Инициализируем движок новеллы
+        // Initialize novel engine
         novelEngine.init(imageGenerator, casinoGames, monetization, inventory, achievements);
 
-        // Сохраняем в глобальную область для доступа из других модулей
+        // Save to global scope for access from other modules
         window.storyData = storyData;
         window.novelEngine = novelEngine;
         window.saveSystem = saveSystem;
@@ -44,27 +44,27 @@ async function initGame() {
             achievements: achievements
         };
 
-        // Обновляем UI инвентаря
+        // Update inventory UI
         inventory.updateUI();
 
-        // Настраиваем обработчики событий
+        // Setup event handlers
         setupEventHandlers();
 
-        // Показываем главное меню
+        // Show main menu
         showScreen('main-menu');
         
-        console.log('Игра инициализирована успешно');
+        console.log('Game initialized successfully');
     } catch (error) {
-        console.error('Ошибка инициализации игры:', error);
-        alert('Ошибка инициализации игры. Проверьте консоль.');
+        console.error('Game initialization error:', error);
+        alert('Game initialization error. Check console.');
     }
 }
 
 /**
- * Настройка обработчиков событий
+ * Setup event handlers
  */
 function setupEventHandlers() {
-    // Главное меню
+    // Main menu
     const btnNewGame = document.getElementById('btn-new-game');
     const btnLoadGame = document.getElementById('btn-load-game');
     const btnSettings = document.getElementById('btn-settings');
@@ -73,35 +73,35 @@ function setupEventHandlers() {
         btnNewGame.addEventListener('click', function(e) {
             e.preventDefault();
             e.stopPropagation();
-            console.log('=== КЛИК ПО КНОПКЕ НОВОЙ ИГРЫ ===');
-            console.log('novelEngine доступен:', typeof novelEngine !== 'undefined');
-            console.log('storyData доступен:', typeof storyData !== 'undefined');
-            console.log('startNewGame доступна:', typeof startNewGame !== 'undefined');
+            console.log('=== NEW GAME BUTTON CLICKED ===');
+            console.log('novelEngine available:', typeof novelEngine !== 'undefined');
+            console.log('storyData available:', typeof storyData !== 'undefined');
+            console.log('startNewGame available:', typeof startNewGame !== 'undefined');
             
             if (typeof startNewGame === 'function') {
                 startNewGame().catch(err => {
-                    console.error('=== ОШИБКА В startNewGame ===');
-                    console.error('Ошибка:', err);
-                    console.error('Сообщение:', err.message);
+                    console.error('=== ERROR IN startNewGame ===');
+                    console.error('Error:', err);
+                    console.error('Message:', err.message);
                     console.error('Stack:', err.stack);
                     if (window.notifications) {
-                        window.notifications.error('Ошибка запуска игры: ' + err.message, 'Ошибка');
+                        window.notifications.error('Error starting game: ' + err.message, 'Error');
                     } else {
-                        console.error('Уведомления недоступны, используем alert');
-                        alert('Ошибка: ' + err.message);
+                        console.error('Notifications unavailable, using alert');
+                        alert('Error: ' + err.message);
                     }
                 });
             } else {
-                console.error('startNewGame не является функцией!');
+                console.error('startNewGame is not a function!');
                 if (window.notifications) {
-                    window.notifications.error('Функция запуска игры не найдена', 'Ошибка');
+                    window.notifications.error('Game start function not found', 'Error');
                 }
             }
             return false;
         });
-        console.log('Обработчик новой игры привязан, элемент:', btnNewGame);
+        console.log('New game handler attached, element:', btnNewGame);
     } else {
-        console.error('Кнопка новой игры не найдена!');
+        console.error('New game button not found!');
     }
     
     if (btnLoadGame) {
@@ -112,7 +112,7 @@ function setupEventHandlers() {
         btnSettings.addEventListener('click', showSettings);
     }
 
-    // Меню в игре
+    // In-game menu
     const btnMenuToggle = document.getElementById('btn-menu-toggle');
     const btnSave = document.getElementById('btn-save');
     const btnLoad = document.getElementById('btn-load');
@@ -133,35 +133,35 @@ function setupEventHandlers() {
         });
     }
     
-    console.log('Все обработчики событий привязаны');
+    console.log('All event handlers attached');
 }
 
 /**
- * Показывает экран
+ * Show screen
  */
 function showScreen(screenId) {
-    console.log('Переключение экрана на:', screenId);
+    console.log('Switching to screen:', screenId);
     
-    // Скрываем все экраны
+    // Hide all screens
     document.querySelectorAll('.screen').forEach(screen => {
         screen.classList.remove('active');
     });
 
-    // Показываем нужный экран
+    // Show target screen
     const screen = document.getElementById(screenId);
     if (screen) {
         screen.classList.add('active');
-        console.log('Экран активирован:', screenId);
+        console.log('Screen activated:', screenId);
     } else {
-        console.error('Экран не найден:', screenId);
+        console.error('Screen not found:', screenId);
     }
 }
 
 /**
- * Начинает новую игру
+ * Start new game
  */
 async function startNewGame() {
-    console.log('=== НАЧАЛО НОВОЙ ИГРЫ ===');
+    console.log('=== STARTING NEW GAME ===');
     console.log('novelEngine:', novelEngine);
     console.log('storyData:', storyData);
     
@@ -241,7 +241,7 @@ function updateLoadingText(text) {
 }
 
 /**
- * Показывает экран загрузки
+ * Show load screen
  */
 function showLoadScreen() {
     const screen = document.getElementById('save-load-screen');
@@ -279,7 +279,7 @@ function showLoadScreen() {
 }
 
 /**
- * Показывает экран сохранения
+ * Show save screen
  */
 function showSaveScreen() {
     const screen = document.getElementById('save-load-screen');
@@ -317,7 +317,7 @@ function showSaveScreen() {
 }
 
 /**
- * Сохраняет игру
+ * Save game
  */
 function saveGame(slotIndex) {
     const gameState = novelEngine.getGameState();
@@ -335,7 +335,7 @@ function saveGame(slotIndex) {
 }
 
 /**
- * Загружает игру
+ * Load game
  */
 async function loadGame(slotIndex) {
     const gameState = saveSystem.loadGame(slotIndex);
@@ -363,7 +363,7 @@ async function loadGame(slotIndex) {
 }
 
 /**
- * Переключает меню в игре
+ * Toggle in-game menu
  */
 function toggleGameMenu() {
     const menu = document.getElementById('game-menu');
@@ -373,7 +373,7 @@ function toggleGameMenu() {
 }
 
 /**
- * Показывает экран достижений
+ * Show achievements screen
  */
 function showAchievementsScreen() {
     const screen = document.getElementById('achievements-screen');
@@ -409,7 +409,7 @@ function showAchievementsScreen() {
 }
 
 /**
- * Возвращается в главное меню
+ * Return to main menu
  */
 async function returnToMainMenu() {
     const confirmed = await window.confirmDialog.show(
@@ -431,7 +431,7 @@ async function returnToMainMenu() {
 }
 
 /**
- * Выход из мини-игры
+ * Exit minigame
  */
 async function exitMinigame() {
     const confirmed = await window.confirmDialog.show(
@@ -445,7 +445,7 @@ async function exitMinigame() {
 }
 
 /**
- * Показывает настройки
+ * Show settings
  */
 function showSettings() {
     if (window.notifications) {
@@ -454,20 +454,20 @@ function showSettings() {
 }
 
 /**
- * Инициализация при загрузке страницы
+ * Initialize on page load
  */
 if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', () => {
-        console.log('DOM загружен, инициализация игры');
+        console.log('DOM loaded, initializing game');
         initGame();
     });
 } else {
-    // DOM уже загружен
-    console.log('DOM уже загружен, инициализация игры');
+    // DOM already loaded
+    console.log('DOM already loaded, initializing game');
     initGame();
 }
 
-// Для тестирования: даем тестовые ресурсы
+// For testing: give test resources
 if (window.location.search.includes('test=true')) {
     document.addEventListener('DOMContentLoaded', () => {
         setTimeout(() => {
@@ -478,24 +478,24 @@ if (window.location.search.includes('test=true')) {
     });
 }
 
-// Экспортируем функцию для тестирования через консоль
+// Export function for console testing
 window.testStartNewGame = function() {
-    console.log('Тестовый запуск через консоль');
+    console.log('Test run via console');
     if (typeof startNewGame === 'function') {
         startNewGame();
     } else {
-        console.error('startNewGame не найдена!');
+        console.error('startNewGame not found!');
     }
 };
 
-// Автоматический запуск для тестирования (раскомментируйте для отладки)
+// Auto-start for testing (uncomment for debugging)
 if (window.location.search.includes('autostart=true')) {
     setTimeout(() => {
-        console.log('Автоматический запуск игры для тестирования...');
+        console.log('Auto-starting game for testing...');
         if (typeof startNewGame === 'function') {
             startNewGame();
         } else {
-            console.error('startNewGame не найдена при автозапуске!');
+            console.error('startNewGame not found on auto-start!');
         }
     }, 2000);
 }

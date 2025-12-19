@@ -1,5 +1,5 @@
 /**
- * Система инвентаря и предметов
+ * Inventory and items system
  */
 
 class Inventory {
@@ -14,7 +14,7 @@ class Inventory {
     }
 
     /**
-     * Добавляет предмет в инвентарь
+     * Add item to inventory
      */
     addItem(type, amount = 1) {
         if (type === 'key' || type === 'keys') {
@@ -36,7 +36,7 @@ class Inventory {
     }
 
     /**
-     * Использует предмет из инвентаря
+     * Use item from inventory
      */
     useItem(type, amount = 1) {
         if (type === 'key' || type === 'keys') {
@@ -76,7 +76,7 @@ class Inventory {
     }
 
     /**
-     * Проверяет наличие предмета
+     * Check if item exists
      */
     hasItem(type, amount = 1) {
         if (type === 'key' || type === 'keys') {
@@ -92,7 +92,7 @@ class Inventory {
     }
 
     /**
-     * Получает количество предмета
+     * Get item amount
      */
     getAmount(type) {
         if (type === 'key' || type === 'keys') {
@@ -108,18 +108,18 @@ class Inventory {
     }
 
     /**
-     * Сохраняет инвентарь
+     * Save inventory
      */
     save() {
         try {
             localStorage.setItem('inventory', JSON.stringify(this.items));
         } catch (e) {
-            console.error('Ошибка сохранения инвентаря:', e);
+            console.error('Error saving inventory:', e);
         }
     }
 
     /**
-     * Загружает инвентарь
+     * Load inventory
      */
     load() {
         try {
@@ -128,12 +128,12 @@ class Inventory {
                 this.items = JSON.parse(saved);
             }
         } catch (e) {
-            console.error('Ошибка загрузки инвентаря:', e);
+            console.error('Error loading inventory:', e);
         }
     }
 
     /**
-     * Сбрасывает инвентарь
+     * Reset inventory
      */
     reset() {
         this.items = {
@@ -147,7 +147,7 @@ class Inventory {
     }
 
     /**
-     * Обновляет UI инвентаря
+     * Update inventory UI
      */
     updateUI() {
         const keysEl = document.getElementById('inventory-keys');
@@ -160,7 +160,8 @@ class Inventory {
     }
 }
 
-// Экспорт
+// Export
 window.Inventory = Inventory;
+
 
 
