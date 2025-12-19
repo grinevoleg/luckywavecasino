@@ -43,37 +43,60 @@ python3 -m http.server 8080
 
 3. Open `http://localhost:8080` in your browser
 
-## Deployment on Vercel
+## Deployment
 
-### Option 1: Deploy via GitHub Integration (Recommended)
+### Deploy on DigitalOcean App Platform (Recommended)
 
-1. Go to [Vercel](https://vercel.com) and sign in with your GitHub account
+#### Option 1: Deploy via GitHub Integration
+
+1. Go to [DigitalOcean App Platform](https://cloud.digitalocean.com/apps)
+2. Click "Create App"
+3. Select "GitHub" as the source
+4. Authorize DigitalOcean to access your GitHub account
+5. Select the repository `grinevoleg/luckywavecasino`
+6. Select the branch `main`
+7. DigitalOcean will detect it's a static site from `.do/app.yaml`
+8. Review the configuration (should auto-detect static site)
+9. Click "Create Resources"
+10. Your app will be deployed and available at `https://your-app-name.ondigitalocean.app`
+
+#### Option 2: Deploy via DigitalOcean CLI
+
+1. Install `doctl`:
+```bash
+# macOS
+brew install doctl
+
+# Or download from https://github.com/digitalocean/doctl/releases
+```
+
+2. Authenticate:
+```bash
+doctl auth init
+```
+
+3. Deploy:
+```bash
+doctl apps create --spec .do/app.yaml
+```
+
+#### Configuration
+
+The project includes `.do/app.yaml` with the following settings:
+- Static site configuration
+- SPA routing (all routes redirect to `index.html`)
+- Auto-deploy on push to main branch
+- Health check endpoint
+
+### Deploy on Vercel (Alternative)
+
+The project also includes `vercel.json` for Vercel deployment:
+
+1. Go to [Vercel](https://vercel.com) and sign in with GitHub
 2. Click "Add New Project"
 3. Import the repository `grinevoleg/luckywavecasino`
-4. Vercel will automatically detect the configuration from `vercel.json`
+4. Vercel will automatically detect the configuration
 5. Click "Deploy"
-6. Your app will be live at `https://your-project.vercel.app`
-
-### Option 2: Deploy via Vercel CLI
-
-1. Install Vercel CLI:
-```bash
-npm i -g vercel
-```
-
-2. Deploy:
-```bash
-vercel
-```
-
-3. Follow the prompts to link your project
-
-### Configuration
-
-The project includes `vercel.json` with the following settings:
-- Static file serving
-- SPA routing (all routes redirect to `index.html`)
-- Cache headers for assets
 
 ## Project Structure
 

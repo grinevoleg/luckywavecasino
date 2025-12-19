@@ -1,0 +1,23 @@
+name: lucky-wave-casino
+region: nyc
+static_sites:
+  - name: lucky-wave-casino
+    github:
+      repo: grinevoleg/luckywavecasino
+      branch: main
+      deploy_on_push: true
+    build_command: ""
+    output_dir: /
+    index_document: index.html
+    error_document: index.html
+    catchall_document: index.html
+    routes:
+      - path: /
+    http_port: 8080
+    health_check:
+      http_path: /
+    envs:
+      - key: NODE_ENV
+        value: production
+        scope: RUN_TIME
+
