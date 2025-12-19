@@ -440,7 +440,26 @@ async function exitMinigame() {
     );
     
     if (confirmed) {
-        showScreen('game-screen');
+        // Reset minigame state
+        if (window.novelEngine && window.novelEngine.currentScene) {
+            // Return to game screen and show choices/dialogues
+            document.getElementById('minigame-screen').classList.remove('active');
+            document.getElementById('game-screen').classList.add('active');
+            
+            // Show choices or dialogues from current scene
+            if (window.novelEngine.currentScene.choices && window.novelEngine.currentScene.choices.length > 0) {
+                window.novelEngine.showChoices(window.novelEngine.currentScene.choices);
+            } else if (window.novelEngine.currentScene.dialogues && window.novelEngine.currentScene.dialogues.length > 0) {
+                window.novelEngine.currentDialogueIndex = 0;
+                window.novelEngine.showDialogue();
+            } else {
+                // Fallback: show choices or minigame option
+                window.novelEngine.showChoicesOrMinigame();
+            }
+        } else {
+            // Fallback if novelEngine not available
+            showScreen('game-screen');
+        }
     }
 }
 

@@ -585,8 +585,20 @@ class NovelEngine {
                     if (storyData) {
                         await this.loadScene(handler.sceneId, storyData);
                     }
+                } else if (handler.dialogues && handler.dialogues.length > 0) {
+                    // If there are dialogues but no sceneId, just show them
+                    this.showDialogue();
+                } else {
+                    // Fallback: show choices or continue
+                    this.showChoicesOrMinigame();
                 }
+            } else {
+                // No handler for this result - show fallback
+                this.showChoicesOrMinigame();
             }
+        } else {
+            // No onMinigameComplete handler at all - show choices or continue
+            this.showChoicesOrMinigame();
         }
     }
 
