@@ -1,0 +1,231 @@
+/**
+ * Стили для системы инвентаря и достижений
+ */
+
+/* Инвентарь HUD - внутри хедера */
+.game-header .inventory-hud {
+    display: flex !important;
+    flex-direction: row !important;
+    gap: 10px;
+    width: 100% !important;
+    height: 100% !important;
+    box-sizing: border-box;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    pointer-events: auto;
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    right: auto !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+/* Общий стиль для инвентаря (если используется вне хедера) */
+.inventory-hud {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
+}
+
+/* Скрываем инвентарь на экране мини-игры */
+#minigame-screen .inventory-hud {
+    display: none !important;
+}
+
+.inventory-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: linear-gradient(135deg, rgba(13, 77, 45, 0.95), rgba(26, 26, 26, 0.95));
+    border: 2px solid var(--color-gold);
+    border-radius: 10px;
+    padding: 8px 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5), 0 0 10px rgba(212, 175, 55, 0.3);
+    backdrop-filter: blur(10px);
+    flex-shrink: 0;
+    white-space: nowrap;
+}
+
+.inventory-icon {
+    font-size: 1.5rem;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.8));
+}
+
+.inventory-value {
+    font-family: var(--font-elegant);
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: var(--color-gold);
+    text-shadow: 0 0 10px rgba(212, 175, 55, 0.7);
+    min-width: 50px;
+    text-align: right;
+}
+
+/* Экран достижений */
+.achievements-container {
+    max-width: 800px;
+    width: 90%;
+    max-height: 80vh;
+    overflow-y: auto;
+    background: linear-gradient(135deg, rgba(13, 77, 45, 0.95), rgba(26, 26, 26, 0.95));
+    border: 3px solid var(--color-gold);
+    border-radius: 20px;
+    padding: 2rem;
+    box-shadow: 0 0 50px rgba(212, 175, 55, 0.5);
+}
+
+.achievements-container h2 {
+    font-family: var(--font-title);
+    font-size: 2.5rem;
+    color: var(--color-gold);
+    text-align: center;
+    margin-bottom: 2rem;
+    text-shadow: 0 0 15px rgba(212, 175, 55, 0.7);
+}
+
+.achievements-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.achievement-item {
+    background: linear-gradient(135deg, rgba(26, 26, 26, 0.8), rgba(13, 77, 45, 0.6));
+    border: 2px solid var(--color-gold);
+    border-radius: 15px;
+    padding: 1.5rem;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.achievement-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(212, 175, 55, 0.1), transparent);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.achievement-item.unlocked {
+    border-color: #FFD700;
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.4);
+}
+
+.achievement-item.unlocked::before {
+    opacity: 1;
+}
+
+.achievement-item.locked {
+    opacity: 0.5;
+    filter: grayscale(0.7);
+}
+
+.achievement-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    display: block;
+    text-align: center;
+}
+
+.achievement-item.locked .achievement-icon {
+    filter: grayscale(1);
+}
+
+.achievement-name {
+    font-family: var(--font-title);
+    font-size: 1.3rem;
+    color: var(--color-gold);
+    margin-bottom: 0.5rem;
+    text-align: center;
+}
+
+.achievement-description {
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    color: var(--color-light-gray);
+    text-align: center;
+    line-height: 1.4;
+}
+
+.achievement-progress {
+    margin-top: 1rem;
+    height: 6px;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.achievement-progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, var(--color-gold), #FFD700);
+    transition: width 0.3s ease;
+    box-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+}
+
+.achievement-progress-text {
+    font-size: 0.8rem;
+    color: var(--color-light-gray);
+    text-align: center;
+    margin-top: 0.5rem;
+}
+
+/* Мобильная адаптация */
+@media screen and (max-width: 768px) {
+    .game-header .inventory-hud {
+        gap: 8px;
+    }
+
+    .game-header .inventory-item {
+        padding: 6px 12px;
+        gap: 6px;
+    }
+
+    .game-header .inventory-icon {
+        font-size: 1.2rem;
+    }
+
+    .game-header .inventory-value {
+        font-size: 1rem;
+        min-width: 40px;
+    }
+
+    .achievements-container {
+        width: 95%;
+        padding: 1.5rem;
+    }
+
+    .achievements-container h2 {
+        font-size: 2rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .achievements-list {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .achievement-item {
+        padding: 1rem;
+    }
+
+    .achievement-icon {
+        font-size: 2.5rem;
+    }
+
+    .achievement-name {
+        font-size: 1.1rem;
+    }
+
+    .achievement-description {
+        font-size: 0.85rem;
+    }
+}
+

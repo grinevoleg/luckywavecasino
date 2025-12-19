@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover, orientation=portrait">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Lucky Wave">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="#0d4d2d">
+    <title>Lucky Wave Chronicles: A Casino Story</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Cinzel:wght@400;600&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/novel.css">
+    <link rel="stylesheet" href="css/casino.css">
+    <link rel="stylesheet" href="css/inventory.css">
+    <link rel="stylesheet" href="css/mobile.css">
+</head>
+<body>
+    <!-- Fixed Header with Inventory -->
+    <header id="game-header" class="game-header">
+        <div id="inventory-hud" class="inventory-hud">
+            <div class="inventory-item">
+                <span class="inventory-icon">🔑</span>
+                <span id="inventory-keys" class="inventory-value">0</span>
+            </div>
+            <div class="inventory-item">
+                <span class="inventory-icon">🎫</span>
+                <span id="inventory-tickets" class="inventory-value">0</span>
+            </div>
+            <div class="inventory-item">
+                <span class="inventory-icon">💰</span>
+                <span id="inventory-money" class="inventory-value">1000</span>
+            </div>
+        </div>
+        <!-- Menu Toggle Button -->
+        <button id="btn-menu-toggle" class="btn-menu-toggle">☰</button>
+    </header>
+
+    <!-- Main Menu -->
+    <div id="main-menu" class="screen active">
+        <div class="menu-container">
+            <h1 class="game-title">Lucky Wave Chronicles</h1>
+            <p class="game-subtitle">A Casino Story</p>
+            <div class="menu-buttons">
+                <button id="btn-new-game" class="menu-btn">New Game</button>
+                <button id="btn-load-game" class="menu-btn">Load Game</button>
+                <button id="btn-settings" class="menu-btn">Settings</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Game Screen (Visual Novel) -->
+    <div id="game-screen" class="screen">
+        <!-- Scene Background -->
+        <div id="scene-background" class="scene-background"></div>
+        
+        <!-- Characters -->
+        <div id="characters-container" class="characters-container"></div>
+        
+        <!-- Dialogue Box -->
+        <div id="dialogue-box" class="dialogue-box">
+            <div id="speaker-name" class="speaker-name"></div>
+            <div id="dialogue-text" class="dialogue-text"></div>
+            <button id="btn-next" class="btn-next">▶</button>
+        </div>
+        
+        <!-- Choices -->
+        <div id="choices-container" class="choices-container"></div>
+        
+        <!-- Game Menu (hidden by default) -->
+        <div id="game-menu" class="game-menu hidden">
+            <button id="btn-save" class="menu-item-btn">Save</button>
+            <button id="btn-load" class="menu-item-btn">Load</button>
+            <button id="btn-menu-back" class="menu-item-btn">Back to Game</button>
+            <button id="btn-quit" class="menu-item-btn">Quit to Menu</button>
+        </div>
+    </div>
+
+    <!-- Minigame Screen -->
+    <div id="minigame-screen" class="screen">
+        <div id="minigame-container" class="minigame-container"></div>
+        <button id="btn-exit-minigame" class="btn-exit-minigame">Exit</button>
+    </div>
+
+    <!-- Save/Load Screen -->
+    <div id="save-load-screen" class="screen">
+        <div class="save-load-container">
+            <h2 id="save-load-title">Save Game</h2>
+            <div id="save-slots" class="save-slots"></div>
+            <button id="btn-back-from-save" class="btn-back">Back</button>
+        </div>
+    </div>
+
+    <!-- Loading Screen -->
+    <div id="loading-screen" class="screen">
+        <div class="loading-container">
+            <div class="loading-spinner"></div>
+            <p id="loading-text">Loading...</p>
+        </div>
+    </div>
+
+    <!-- Notification System -->
+    <div id="notification-container" class="notification-container"></div>
+
+    <!-- Achievements Screen -->
+    <div id="achievements-screen" class="screen">
+        <div class="achievements-container">
+            <h2>Achievements</h2>
+            <div id="achievements-list" class="achievements-list"></div>
+            <button id="btn-close-achievements" class="btn-back">Close</button>
+        </div>
+    </div>
+
+    <!-- Confirmation Modal -->
+    <div id="confirm-modal" class="modal-overlay hidden">
+        <div class="modal-content">
+            <h3 id="confirm-title" class="modal-title">Confirmation</h3>
+            <p id="confirm-message" class="modal-message"></p>
+            <div class="modal-buttons">
+                <button id="confirm-yes" class="modal-btn modal-btn-primary">Yes</button>
+                <button id="confirm-no" class="modal-btn modal-btn-secondary">No</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Подключение скриптов -->
+    <script src="js/mobile-support.js"></script>
+    <script src="js/mcp-bridge.js"></script>
+    <script src="js/hf-image-generator.js"></script>
+    <script src="js/casino-games.js"></script>
+    <script src="js/save-system.js"></script>
+    <script src="js/monetization.js"></script>
+    <script src="js/inventory.js"></script>
+    <script src="js/achievements.js"></script>
+    <script src="js/notifications.js"></script>
+    <script src="js/story-data.js"></script>
+    <script src="js/novel-engine.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
+

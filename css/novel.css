@@ -1,0 +1,294 @@
+/* Стили визуальной новеллы */
+
+#game-screen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 100;
+}
+
+/* Фон сцены */
+.scene-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    transition: opacity 0.5s ease;
+    z-index: 1;
+}
+
+/* Контейнер персонажей */
+.characters-container {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 70%;
+    z-index: 2;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    gap: 2rem;
+    padding: 0 2rem;
+}
+
+.character {
+    position: relative;
+    width: 300px;
+    height: 300px;
+    max-width: 400px;
+    max-height: 400px;
+    opacity: 0;
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    transform: translateY(20px);
+    /* Круглая рамка для персонажа */
+    border-radius: 50%;
+    overflow: hidden;
+    /* Красивая рамка */
+    border: 4px solid var(--color-gold);
+    box-shadow: 
+        0 0 0 2px var(--color-dark-green),
+        0 0 20px rgba(212, 175, 55, 0.5),
+        inset 0 0 30px rgba(212, 175, 55, 0.2);
+    background: linear-gradient(135deg, rgba(13, 77, 45, 0.3), rgba(26, 26, 26, 0.5));
+    /* Эффект свечения */
+    animation: characterGlow 3s ease-in-out infinite;
+}
+
+@keyframes characterGlow {
+    0%, 100% {
+        box-shadow: 
+            0 0 0 2px var(--color-dark-green),
+            0 0 20px rgba(212, 175, 55, 0.5),
+            inset 0 0 30px rgba(212, 175, 55, 0.2);
+    }
+    50% {
+        box-shadow: 
+            0 0 0 2px var(--color-dark-green),
+            0 0 30px rgba(212, 175, 55, 0.7),
+            inset 0 0 40px rgba(212, 175, 55, 0.3);
+    }
+}
+
+.character.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.character img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    /* Прозрачный фон для PNG изображений */
+    background: transparent;
+    /* Убираем фильтры которые могут добавлять фон */
+    filter: none;
+    /* Убеждаемся что изображение отображается с прозрачностью */
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+    /* Маска для круглой формы */
+    border-radius: 50%;
+    display: block;
+}
+
+.character.left {
+    align-self: flex-start;
+    margin-right: auto;
+}
+
+.character.center {
+    align-self: center;
+}
+
+.character.right {
+    align-self: flex-start;
+    margin-left: auto;
+}
+
+/* Диалоговое окно */
+.dialogue-box {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: linear-gradient(to top, rgba(26, 26, 26, 0.95), rgba(26, 26, 26, 0.85));
+    border-top: 3px solid var(--color-gold);
+    padding: 2rem;
+    z-index: 10;
+    min-height: 200px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.5);
+    /* Безопасная зона для iPhone с вырезом */
+    padding-bottom: max(2rem, env(safe-area-inset-bottom));
+}
+
+.speaker-name {
+    font-family: var(--font-elegant);
+    font-size: 1.3rem;
+    color: var(--color-gold);
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    min-height: 1.5rem;
+}
+
+.speaker-name.narrator {
+    font-style: italic;
+    color: var(--color-light-gray);
+}
+
+.dialogue-text {
+    font-family: var(--font-body);
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: var(--color-light-gray);
+    flex-grow: 1;
+    min-height: 60px;
+}
+
+.dialogue-text.typing {
+    border-right: 2px solid var(--color-gold);
+    animation: blink 1s infinite;
+}
+
+@keyframes blink {
+    0%, 50% { border-color: var(--color-gold); }
+    51%, 100% { border-color: transparent; }
+}
+
+.btn-next {
+    position: absolute;
+    bottom: 2rem;
+    right: 2rem;
+    background: var(--color-gold);
+    color: var(--color-black);
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.btn-next:hover {
+    background: #e5c147;
+    transform: scale(1.1);
+    box-shadow: 0 6px 15px rgba(212, 175, 55, 0.5);
+}
+
+.btn-next:active {
+    transform: scale(0.95);
+}
+
+.btn-next.hidden {
+    display: none;
+}
+
+/* Контейнер выборов */
+.choices-container {
+    position: absolute;
+    bottom: 220px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 11;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 90%;
+    max-width: 600px;
+}
+
+.choice-btn {
+    background: linear-gradient(135deg, var(--color-dark-green), #0a3d24);
+    color: var(--color-gold);
+    border: 2px solid var(--color-gold);
+    border-radius: 5px;
+    padding: 1rem 1.5rem;
+    font-family: var(--font-body);
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: left;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.5s ease forwards;
+}
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.choice-btn:nth-child(1) { animation-delay: 0.1s; }
+.choice-btn:nth-child(2) { animation-delay: 0.2s; }
+.choice-btn:nth-child(3) { animation-delay: 0.3s; }
+.choice-btn:nth-child(4) { animation-delay: 0.4s; }
+
+.choice-btn:hover {
+    background: linear-gradient(135deg, #0f5d3d, var(--color-dark-green));
+    box-shadow: 0 6px 20px rgba(212, 175, 55, 0.4);
+    transform: translateX(10px);
+}
+
+.choice-btn:active {
+    transform: translateX(5px);
+}
+
+.choice-btn.premium {
+    border-color: #ffd700;
+    background: linear-gradient(135deg, #1a4d2d, #0d4d2d);
+    position: relative;
+}
+
+.choice-btn.premium::before {
+    content: "💎";
+    margin-right: 0.5rem;
+}
+
+.choice-btn.locked {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+.choice-btn.locked::after {
+    content: "🔒";
+    margin-left: 0.5rem;
+}
+
+/* Анимации переходов */
+.fade-in {
+    animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.fade-out {
+    animation: fadeOut 0.5s ease;
+}
+
+@keyframes fadeOut {
+    from { opacity: 1; }
+    to { opacity: 0; }
+}
+

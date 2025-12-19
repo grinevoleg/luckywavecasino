@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Тест</title>
+</head>
+<body>
+    <button id="test-btn">Тест клика</button>
+    <div id="output"></div>
+    
+    <script>
+        document.getElementById('test-btn').addEventListener('click', function() {
+            document.getElementById('output').textContent = 'Кнопка работает!';
+            console.log('Клик работает!');
+        });
+    </script>
+</body>
+</html>
+
+

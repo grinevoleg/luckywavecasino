@@ -1,0 +1,52 @@
+{
+  "chapterId": "chapter1",
+  "title": "Первая волна",
+  "description": "Герой входит в роскошное казино, чтобы выполнить свою первую миссию",
+  "requiredKey": false,
+  "scenes": [
+    {
+      "sceneId": "intro",
+      "background": "casino_lobby",
+      "characters": [
+        {
+          "name": "hero",
+          "position": "center",
+          "emotion": "confident"
+        }
+      ],
+      "dialogues": [
+        {
+          "speaker": "narrator",
+          "text": "Ночь. Неоновые огни отражаются в мокром асфальте."
+        },
+        {
+          "speaker": "narrator",
+          "text": "Вы стоите перед входом в самое роскошное казино города - 'Lucky Wave'."
+        },
+        {
+          "speaker": "hero",
+          "text": "Это мой шанс. Моя первая большая миссия."
+        },
+        {
+          "speaker": "narrator",
+          "text": "Вы поправляете галстук и делаете глубокий вдох."
+        },
+        {
+          "speaker": "hero",
+          "text": "Время поймать волну удачи..."
+        }
+      ],
+      "choices": [
+        {
+          "text": "Войти в казино",
+          "nextScene": "inside",
+          "required": null,
+          "premium": false
+        }
+      ],
+      "minigame": null,
+      "onMinigameComplete": null
+    }
+  ]
+}
+

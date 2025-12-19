@@ -1,0 +1,554 @@
+/* Основные стили */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --color-dark-green: #0d4d2d;
+    --color-gold: #d4af37;
+    --color-black: #1a1a1a;
+    --color-dark-gray: #2a2a2a;
+    --color-light-gray: #e0e0e0;
+    --color-white: #ffffff;
+    --color-red: #c41e3a;
+    
+    --font-title: 'Playfair Display', serif;
+    --font-elegant: 'Cinzel', serif;
+    --font-body: 'Roboto', sans-serif;
+    
+    /* Переменная для высоты viewport на iOS */
+    --vh: 1vh;
+}
+
+body {
+    font-family: var(--font-body);
+    background: var(--color-black);
+    color: var(--color-light-gray);
+    overflow: hidden;
+    height: 100vh;
+    height: calc(var(--vh, 1vh) * 100); /* Для iOS Safari */
+    height: -webkit-fill-available; /* Для iOS Safari */
+    width: 100vw;
+    /* Предотвращение bounce эффекта на iOS */
+    overscroll-behavior: none;
+    -webkit-overflow-scrolling: touch;
+    /* Безопасная зона для iPhone с вырезом */
+    padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+}
+
+/* Fixed Header */
+.game-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 80px;
+    z-index: 1000;
+    background: linear-gradient(180deg, rgba(13, 77, 45, 0.98), rgba(26, 26, 26, 0.95));
+    border-bottom: 2px solid var(--color-gold);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+
+.game-header .inventory-hud {
+    width: auto !important;
+    height: 100% !important;
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    position: relative !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    flex: 1;
+}
+
+.screen {
+    display: none !important;
+    width: 100%;
+    height: 100%;
+    height: -webkit-fill-available; /* Для iOS Safari */
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    /* Безопасная зона для iPhone с вырезом */
+    padding-top: calc(80px + env(safe-area-inset-top)); /* Отступ для фиксированного хедера */
+    padding-bottom: env(safe-area-inset-bottom);
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
+    box-sizing: border-box;
+}
+
+.screen.active {
+    display: flex !important;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+}
+
+#game-screen.active {
+    z-index: 100;
+    display: flex !important;
+}
+
+/* Главное меню */
+.menu-container {
+    text-align: center;
+    padding: 2rem;
+}
+
+.game-title {
+    font-family: var(--font-title);
+    font-size: 4rem;
+    color: var(--color-gold);
+    text-shadow: 0 0 20px rgba(212, 175, 55, 0.5);
+    margin-bottom: 0.5rem;
+    letter-spacing: 2px;
+}
+
+.game-subtitle {
+    font-family: var(--font-elegant);
+    font-size: 1.5rem;
+    color: var(--color-light-gray);
+    margin-bottom: 3rem;
+    letter-spacing: 4px;
+}
+
+.menu-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+}
+
+.menu-btn {
+    font-family: var(--font-elegant);
+    font-size: 1.2rem;
+    padding: 1rem 3rem;
+    background: linear-gradient(135deg, var(--color-dark-green), #0a3d24);
+    color: var(--color-gold);
+    border: 2px solid var(--color-gold);
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-width: 250px;
+    letter-spacing: 1px;
+}
+
+.menu-btn:hover {
+    background: linear-gradient(135deg, #0f5d3d, var(--color-dark-green));
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+    transform: translateY(-2px);
+}
+
+.menu-btn:active {
+    transform: translateY(0);
+}
+
+/* Кнопка меню в хедере */
+.game-header .btn-menu-toggle {
+    position: relative;
+    margin-left: auto;
+    background: rgba(26, 26, 26, 0.8);
+    color: var(--color-gold);
+    border: 2px solid var(--color-gold);
+    border-radius: 5px;
+    padding: 10px 15px;
+    font-size: 1.5rem;
+    cursor: pointer;
+    z-index: 1001;
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+}
+
+/* Общий стиль для кнопки меню (если используется вне хедера) */
+.btn-menu-toggle {
+    background: rgba(26, 26, 26, 0.8);
+    color: var(--color-gold);
+    border: 2px solid var(--color-gold);
+    border-radius: 5px;
+    padding: 10px 15px;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-menu-toggle:hover {
+    background: rgba(26, 26, 26, 0.95);
+    box-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+}
+
+/* Меню в игре */
+.game-menu {
+    position: fixed;
+    top: 90px; /* Ниже хедера (80px + отступ) */
+    right: 20px;
+    background: rgba(26, 26, 26, 0.95);
+    border: 2px solid var(--color-gold);
+    border-radius: 5px;
+    padding: 1rem;
+    z-index: 1000; /* Выше инвентаря */
+    min-width: 200px;
+}
+
+.game-menu.hidden {
+    display: none;
+}
+
+.menu-item-btn {
+    display: block;
+    width: 100%;
+    padding: 0.75rem 1rem;
+    margin-bottom: 0.5rem;
+    background: var(--color-dark-green);
+    color: var(--color-gold);
+    border: 1px solid var(--color-gold);
+    border-radius: 3px;
+    cursor: pointer;
+    font-family: var(--font-body);
+    transition: all 0.3s ease;
+}
+
+.menu-item-btn:hover {
+    background: #0f5d3d;
+    box-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
+}
+
+.menu-item-btn:last-child {
+    margin-bottom: 0;
+}
+
+/* Экран сохранений/загрузки */
+.save-load-container {
+    background: rgba(26, 26, 26, 0.95);
+    border: 2px solid var(--color-gold);
+    border-radius: 10px;
+    padding: 1.5rem;
+    max-width: 800px;
+    width: calc(100% - 2rem);
+    max-width: calc(100vw - 2rem);
+    box-sizing: border-box;
+    overflow-y: auto;
+    max-height: calc(100vh - 8rem); /* Учитываем инвентарь сверху */
+    margin: 6rem auto 1rem auto; /* Большой отступ сверху для инвентаря */
+    position: relative;
+}
+
+.save-load-container h2 {
+    font-family: var(--font-title);
+    color: var(--color-gold);
+    margin-bottom: 1.5rem;
+    text-align: center;
+    font-size: 2rem;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+.save-slots {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    overflow-x: hidden;
+}
+
+.save-slot {
+    background: var(--color-dark-green);
+    border: 2px solid var(--color-gold);
+    border-radius: 5px;
+    padding: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-height: 120px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+.save-slot:hover {
+    background: #0f5d3d;
+    box-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
+}
+
+.save-slot.empty {
+    border-style: dashed;
+    opacity: 0.5;
+}
+
+.save-slot-date {
+    font-size: 0.9rem;
+    color: var(--color-light-gray);
+    margin-bottom: 0.5rem;
+}
+
+.save-slot-preview {
+    font-size: 0.8rem;
+    color: var(--color-gold);
+    flex-grow: 1;
+}
+
+.btn-back {
+    display: block;
+    margin: 0 auto;
+    padding: 0.75rem 2rem;
+    background: var(--color-dark-green);
+    color: var(--color-gold);
+    border: 2px solid var(--color-gold);
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: var(--font-body);
+    transition: all 0.3s ease;
+}
+
+.btn-back:hover {
+    background: #0f5d3d;
+    box-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
+}
+
+/* Загрузочный экран */
+.loading-container {
+    text-align: center;
+}
+
+.loading-spinner {
+    width: 60px;
+    height: 60px;
+    border: 4px solid var(--color-dark-green);
+    border-top-color: var(--color-gold);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 1rem;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+#loading-text {
+    font-family: var(--font-body);
+    color: var(--color-gold);
+    font-size: 1.2rem;
+}
+
+/* Система уведомлений */
+.notification-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 10000;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    pointer-events: none;
+}
+
+.notification {
+    background: rgba(26, 26, 26, 0.95);
+    border: 2px solid var(--color-gold);
+    border-radius: 5px;
+    padding: 1rem 1.5rem;
+    min-width: 300px;
+    max-width: 400px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    pointer-events: auto;
+    animation: slideInRight 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.notification.success {
+    border-color: #4CAF50;
+}
+
+.notification.error {
+    border-color: #f44336;
+}
+
+.notification.warning {
+    border-color: #FFC107;
+}
+
+.notification-icon {
+    font-size: 1.5rem;
+    flex-shrink: 0;
+}
+
+.notification-content {
+    flex-grow: 1;
+}
+
+.notification-title {
+    font-family: var(--font-elegant);
+    font-size: 1rem;
+    color: var(--color-gold);
+    margin-bottom: 0.25rem;
+}
+
+.notification-message {
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    color: var(--color-light-gray);
+}
+
+.notification-close {
+    background: none;
+    border: none;
+    color: var(--color-gold);
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding: 0;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: color 0.3s ease;
+}
+
+.notification-close:hover {
+    color: #e5c147;
+}
+
+@keyframes slideInRight {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.notification.fade-out {
+    animation: slideOutRight 0.3s ease forwards;
+}
+
+@keyframes slideOutRight {
+    from {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+}
+
+/* Модальное окно подтверждения */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10001;
+    animation: fadeIn 0.3s ease;
+}
+
+.modal-content {
+    background: rgba(26, 26, 26, 0.98);
+    border: 3px solid var(--color-gold);
+    border-radius: 10px;
+    padding: 2rem;
+    max-width: 500px;
+    width: 90%;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+    animation: scaleIn 0.3s ease;
+}
+
+@keyframes scaleIn {
+    from {
+        transform: scale(0.9);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.modal-title {
+    font-family: var(--font-title);
+    font-size: 1.8rem;
+    color: var(--color-gold);
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.modal-message {
+    font-family: var(--font-body);
+    font-size: 1.1rem;
+    color: var(--color-light-gray);
+    margin-bottom: 2rem;
+    text-align: center;
+    line-height: 1.6;
+}
+
+.modal-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+}
+
+.modal-btn {
+    padding: 0.75rem 2rem;
+    border: 2px solid;
+    border-radius: 5px;
+    font-family: var(--font-body);
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-width: 120px;
+}
+
+.modal-btn-primary {
+    background: var(--color-gold);
+    color: var(--color-black);
+    border-color: var(--color-gold);
+}
+
+.modal-btn-primary:hover {
+    background: #e5c147;
+    box-shadow: 0 0 15px rgba(212, 175, 55, 0.5);
+}
+
+.modal-btn-secondary {
+    background: transparent;
+    color: var(--color-gold);
+    border-color: var(--color-gold);
+}
+
+.modal-btn-secondary:hover {
+    background: rgba(212, 175, 55, 0.1);
+    box-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
+}
+
+/* Утилиты */
+.hidden {
+    display: none !important;
+}
+

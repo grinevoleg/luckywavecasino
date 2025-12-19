@@ -1,0 +1,618 @@
+/* Адаптивные стили для мобильных устройств (iPhone) */
+/* Только вертикальная ориентация (portrait) */
+
+/* Медиа-запросы для мобильных устройств */
+@media screen and (max-width: 768px) {
+    /* Fixed Header */
+    .game-header {
+        height: 70px;
+        padding: 0 10px;
+        display: flex;
+        align-items: center;
+    }
+
+    .game-header .inventory-hud {
+        gap: 8px;
+        width: 100%;
+        justify-content: flex-start;
+    }
+
+    .game-header .inventory-item {
+        padding: 6px 12px;
+        gap: 6px;
+    }
+
+    .game-header .inventory-icon {
+        font-size: 1.2rem;
+    }
+
+    .game-header .inventory-value {
+        font-size: 1rem;
+        min-width: 40px;
+    }
+
+    /* Основные настройки */
+    body {
+        overflow: hidden;
+        -webkit-overflow-scrolling: touch;
+        touch-action: pan-y;
+    }
+
+    .screen {
+        padding-top: calc(70px + env(safe-area-inset-top)) !important;
+    }
+
+    /* Главное меню */
+    .game-title {
+        font-size: 2.5rem !important;
+        margin-bottom: 0.5rem;
+    }
+
+    .game-subtitle {
+        font-size: 1.2rem !important;
+        margin-bottom: 2rem;
+    }
+
+    .menu-btn {
+        font-size: 1rem;
+        padding: 0.9rem 2rem;
+        min-width: 200px;
+    }
+
+    /* Экран игры */
+    #game-screen {
+        position: fixed;
+        width: 100vw;
+        height: 100vh;
+        overflow: hidden;
+    }
+
+    /* Фон сцены */
+    .scene-background {
+        width: 100vw;
+        height: 100vh;
+    }
+
+    /* Контейнер персонажей */
+    .characters-container {
+        height: 60%;
+        padding: 0 1rem;
+        gap: 1rem;
+    }
+
+    .character {
+        width: 200px;
+        height: 200px;
+        max-width: 250px;
+        max-height: 250px;
+        border-width: 3px;
+    }
+
+    /* Инвентарь на мобильных - только внутри хедера */
+    .game-header .inventory-hud {
+        gap: 6px !important;
+    }
+
+    .game-header .inventory-item {
+        padding: 6px 12px !important;
+        font-size: 0.85rem !important;
+        flex: 0 0 auto !important;
+    }
+
+    .game-header .inventory-icon {
+        font-size: 1.1rem !important;
+    }
+
+    .inventory-value {
+        font-size: 0.9rem;
+        min-width: 35px;
+    }
+
+    /* Диалоговое окно */
+    .dialogue-box {
+        min-height: 180px;
+        padding: 1.5rem 1rem;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+    }
+
+    .speaker-name {
+        font-size: 1.1rem;
+        margin-bottom: 0.75rem;
+    }
+
+    .dialogue-text {
+        font-size: 1rem;
+        line-height: 1.5;
+        min-height: 50px;
+    }
+
+    .btn-next {
+        width: 45px;
+        height: 45px;
+        font-size: 1.3rem;
+        bottom: 1.5rem;
+        right: 1rem;
+    }
+
+    /* Выборы */
+    .choices-container {
+        bottom: 200px;
+        width: 95%;
+        max-width: none;
+        gap: 0.75rem;
+    }
+
+    .choice-btn {
+        padding: 0.9rem 1.2rem;
+        font-size: 0.95rem;
+        width: 100%;
+    }
+
+    .choice-btn:hover {
+        transform: none; /* Убираем трансформацию на мобильных */
+    }
+
+    .choice-btn:active {
+        transform: scale(0.98);
+        background: linear-gradient(135deg, #0f5d3d, var(--color-dark-green));
+    }
+
+    /* Кнопка меню в хедере */
+    .game-header .btn-menu-toggle {
+        padding: 8px 12px;
+        font-size: 1.3rem;
+        margin-left: auto;
+    }
+
+    /* Меню в игре */
+    .game-menu {
+        top: 50px;
+        right: 15px;
+        min-width: 180px;
+        padding: 0.75rem;
+    }
+
+    .menu-item-btn {
+        padding: 0.65rem 0.9rem;
+        font-size: 0.95rem;
+    }
+
+    /* Мини-игры */
+    #minigame-screen {
+        padding: 1rem;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .minigame-container {
+        padding: 1rem;
+        max-width: 100%;
+        width: 100%;
+        margin: 0;
+        border-width: 2px;
+    }
+
+    .minigame-title {
+        font-size: 1.8rem;
+        margin-bottom: 1rem;
+        line-height: 1.2;
+    }
+
+    .minigame-instructions {
+        font-size: 0.9rem;
+        margin-bottom: 1rem;
+        line-height: 1.4;
+        padding: 0 0.5rem;
+    }
+
+    /* Блэкджек */
+    .blackjack-table {
+        gap: 1.5rem;
+    }
+
+    .blackjack-hand {
+        gap: 0.75rem;
+    }
+
+    .hand-label {
+        font-size: 1.1rem;
+    }
+
+    .hand-cards {
+        min-height: 100px;
+        gap: 0.5rem;
+        padding: 0.5rem 0;
+    }
+
+    .card {
+        width: 70px;
+        height: 98px;
+        padding: 0.4rem;
+        font-size: 0.9rem;
+        border-width: 1.5px;
+    }
+
+    .card-value {
+        font-size: 1rem;
+    }
+
+    .card-suit {
+        font-size: 1.3rem;
+    }
+
+    .hand-value {
+        font-size: 1rem;
+        margin-top: 0.25rem;
+    }
+
+    .blackjack-controls {
+        gap: 0.75rem;
+        padding: 0.5rem 0;
+    }
+
+    .casino-btn {
+        padding: 0.9rem 1.2rem;
+        font-size: 0.95rem;
+        min-width: 140px;
+        width: 100%;
+        max-width: 200px;
+        border-width: 2px;
+    }
+
+    .blackjack-result {
+        font-size: 1.4rem;
+        margin-top: 0.75rem;
+    }
+
+    /* Слоты */
+    .slots-machine {
+        gap: 1.5rem;
+        padding: 1rem;
+        padding-top: 6rem; /* Большой отступ сверху для инвентаря на мобильных */
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+        margin-top: 0;
+        min-height: calc(100vh - 8rem);
+        justify-content: flex-start; /* Начинаем сверху после отступа */
+    }
+
+    .slots-reels {
+        gap: 0.5rem;
+        flex-wrap: nowrap;
+        padding: 1rem;
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+        overflow-x: visible;
+    }
+
+    .reel {
+        width: calc((100% - 1rem) / 3);
+        max-width: 110px;
+        min-width: 90px;
+        height: 130px;
+        border-width: 3px;
+        border-radius: 12px;
+        flex-shrink: 0;
+        box-sizing: border-box;
+    }
+
+    .reel-symbol {
+        width: 100%;
+        height: 130px;
+        font-size: 3.5rem;
+    }
+
+    @keyframes spin-reel {
+        0% { 
+            transform: translateY(0) rotateX(0deg);
+        }
+        100% { 
+            transform: translateY(-130px) rotateX(360deg);
+        }
+    }
+
+    .slots-controls {
+        gap: 0.75rem;
+        width: 100%;
+    }
+
+    .spin-btn {
+        padding: 1.2rem 2.5rem;
+        font-size: 1.1rem;
+        width: 100%;
+        max-width: 280px;
+        letter-spacing: 2px;
+        border-width: 2px;
+    }
+
+    .slots-result {
+        font-size: 1.3rem;
+        padding: 0.75rem;
+        min-height: 2.5rem;
+    }
+
+    /* Покер */
+    .poker-table {
+        gap: 1.5rem;
+    }
+
+    .poker-community-cards {
+        gap: 0.5rem;
+        min-height: 100px;
+    }
+
+    .poker-player-hand {
+        gap: 0.75rem;
+    }
+
+    .poker-controls {
+        gap: 0.75rem;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .poker-bet-input {
+        width: 100%;
+        max-width: 200px;
+        padding: 0.75rem;
+        font-size: 0.95rem;
+    }
+
+    .poker-result {
+        font-size: 1.4rem;
+    }
+
+    /* Кнопка выхода */
+    .btn-exit-minigame {
+        margin-top: 1rem;
+        padding: 0.75rem 1.5rem;
+        font-size: 0.95rem;
+        width: 100%;
+        max-width: 200px;
+    }
+
+    /* Уведомления */
+    .notification-container {
+        top: 10px;
+        right: 10px;
+        left: 10px;
+        max-width: none;
+    }
+
+    .notification {
+        min-width: auto;
+        max-width: 100%;
+        padding: 1rem;
+    }
+
+    .notification-title {
+        font-size: 0.95rem;
+    }
+
+    .notification-message {
+        font-size: 0.85rem;
+    }
+
+    /* Модальное окно */
+    .modal-content {
+        padding: 1.5rem;
+        width: 95%;
+        max-width: 400px;
+    }
+
+    .modal-title {
+        font-size: 1.5rem;
+        margin-bottom: 0.75rem;
+    }
+
+    .modal-message {
+        font-size: 1rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .modal-btn {
+        padding: 0.75rem 1.5rem;
+        font-size: 0.95rem;
+        min-width: 100px;
+    }
+
+    /* Сохранения */
+    .save-load-container {
+        padding: 1.5rem;
+        width: 95%;
+    }
+
+    /* Экран сохранений/загрузки */
+    .save-load-container {
+        width: calc(100% - 1rem) !important;
+        max-width: calc(100vw - 1rem) !important;
+        padding: 1rem !important;
+        margin: 5rem 0.5rem 0.5rem 0.5rem !important; /* Отступ сверху для инвентаря */
+        max-height: calc(100vh - 6rem) !important; /* Учитываем инвентарь */
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .save-load-container h2 {
+        font-size: 1.3rem !important;
+        margin-bottom: 1rem !important;
+        padding: 0 0.5rem;
+    }
+
+    .save-slots {
+        grid-template-columns: 1fr !important;
+        gap: 0.75rem !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box;
+        margin-bottom: 1rem !important;
+    }
+
+    .save-slot {
+        min-height: 90px !important;
+        padding: 0.75rem !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+    }
+
+    .save-slot-date {
+        font-size: 0.8rem !important;
+        word-wrap: break-word;
+    }
+
+    .save-slot-preview {
+        font-size: 0.75rem !important;
+        word-wrap: break-word;
+    }
+
+    .btn-back {
+        width: calc(100% - 1rem) !important;
+        max-width: 100% !important;
+        padding: 0.9rem 1rem !important;
+        font-size: 0.9rem !important;
+        margin: 0 auto !important;
+    }
+}
+
+/* Для очень маленьких экранов (iPhone SE и меньше) */
+@media screen and (max-width: 375px) {
+    .game-title {
+        font-size: 2rem !important;
+    }
+
+    .game-subtitle {
+        font-size: 1rem !important;
+    }
+
+    .menu-btn {
+        padding: 0.8rem 1.5rem;
+        min-width: 180px;
+        font-size: 0.95rem;
+    }
+
+    .save-load-container {
+        padding: 0.75rem !important;
+        margin: 4.5rem 0.25rem 0.25rem 0.25rem !important; /* Отступ сверху для инвентаря */
+        width: calc(100% - 0.5rem) !important;
+        max-width: calc(100vw - 0.5rem) !important;
+        max-height: calc(100vh - 5rem) !important;
+    }
+
+    .save-load-container h2 {
+        font-size: 1.1rem !important;
+        margin-bottom: 0.75rem !important;
+    }
+
+    .save-slot {
+        min-height: 80px !important;
+        padding: 0.6rem !important;
+    }
+
+    .save-slot-date {
+        font-size: 0.75rem !important;
+    }
+
+    .save-slot-preview {
+        font-size: 0.7rem !important;
+    }
+
+    .btn-back {
+        padding: 0.8rem 1rem !important;
+        font-size: 0.85rem !important;
+    }
+
+    .character {
+        width: 180px;
+        height: 180px;
+        max-width: 220px;
+        max-height: 220px;
+        border-width: 3px;
+    }
+
+    .dialogue-box {
+        min-height: 160px;
+        padding: 1.2rem 0.75rem;
+    }
+
+    .dialogue-text {
+        font-size: 0.95rem;
+    }
+
+    /* Мини-игры для маленьких экранов */
+    .minigame-container {
+        padding: 0.75rem;
+    }
+
+    .minigame-title {
+        font-size: 1.5rem;
+        margin-bottom: 0.75rem;
+    }
+
+    .minigame-instructions {
+        font-size: 0.85rem;
+        margin-bottom: 0.75rem;
+    }
+
+    .card {
+        width: 60px;
+        height: 84px;
+        padding: 0.3rem;
+        font-size: 0.8rem;
+    }
+
+    .card-value {
+        font-size: 0.9rem;
+    }
+
+    .card-suit {
+        font-size: 1.1rem;
+    }
+
+    .hand-label {
+        font-size: 1rem;
+    }
+
+    .casino-btn {
+        padding: 0.8rem 1rem;
+        font-size: 0.9rem;
+        min-width: 120px;
+    }
+
+    .reel {
+        width: calc((100% - 0.5rem) / 3);
+        max-width: 90px;
+        min-width: 75px;
+        height: 110px;
+        border-width: 2px;
+        flex-shrink: 0;
+        box-sizing: border-box;
+    }
+
+    .reel-symbol {
+        height: 110px;
+        font-size: 3rem;
+    }
+
+    @keyframes spin-reel {
+        0% { 
+            transform: translateY(0) rotateX(0deg);
+        }
+        100% { 
+            transform: translateY(-110px) rotateX(360deg);
+        }
+    }
+
+    .spin-btn {
+        padding: 1rem 2rem;
+        font-size: 1rem;
+        letter-spacing: 1.5px;
+    }
+}
+

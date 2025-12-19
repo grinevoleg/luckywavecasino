@@ -1,0 +1,511 @@
+/* Стили мини-игр казино */
+
+#minigame-screen {
+    background: linear-gradient(135deg, var(--color-black), var(--color-dark-gray));
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 2rem;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    min-height: 100vh;
+    z-index: 200 !important;
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+}
+
+.minigame-container {
+    background: rgba(26, 26, 26, 0.95);
+    border: 3px solid var(--color-gold);
+    border-radius: 15px;
+    padding: 2rem;
+    max-width: 900px;
+    width: 100%;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+    margin: auto;
+    /* Безопасная зона для мобильных */
+    margin-top: max(6rem, env(safe-area-inset-top)); /* Большой отступ сверху для инвентаря */
+    margin-bottom: max(1rem, env(safe-area-inset-bottom));
+    overflow-y: auto;
+    max-height: calc(100vh - 8rem);
+}
+
+.minigame-title {
+    font-family: var(--font-title);
+    font-size: 2.5rem;
+    color: var(--color-gold);
+    text-align: center;
+    margin-bottom: 2rem;
+    text-shadow: 0 0 20px rgba(212, 175, 55, 0.5);
+}
+
+.minigame-instructions {
+    font-family: var(--font-body);
+    color: var(--color-light-gray);
+    text-align: center;
+    margin-bottom: 2rem;
+    font-size: 1.1rem;
+}
+
+/* Блэкджек */
+.blackjack-table {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.blackjack-hand {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.hand-label {
+    font-family: var(--font-elegant);
+    font-size: 1.3rem;
+    color: var(--color-gold);
+    text-align: center;
+}
+
+.hand-cards {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    min-height: 150px;
+}
+
+.card {
+    width: 100px;
+    height: 140px;
+    background: var(--color-white);
+    border: 2px solid var(--color-black);
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 0.5rem;
+    font-size: 1.2rem;
+    font-weight: bold;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.card.red {
+    color: var(--color-red);
+}
+
+.card.black {
+    color: var(--color-black);
+}
+
+.card-back {
+    background: linear-gradient(135deg, var(--color-dark-green), var(--color-gold));
+    color: transparent;
+}
+
+.card-value {
+    font-size: 1.5rem;
+}
+
+.card-suit {
+    font-size: 2rem;
+    text-align: center;
+}
+
+.hand-value {
+    font-family: var(--font-body);
+    font-size: 1.2rem;
+    color: var(--color-light-gray);
+    text-align: center;
+    margin-top: 0.5rem;
+}
+
+.blackjack-controls {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.casino-btn {
+    padding: 1rem 2rem;
+    background: linear-gradient(135deg, var(--color-dark-green), #0a3d24);
+    color: var(--color-gold);
+    border: 2px solid var(--color-gold);
+    border-radius: 5px;
+    font-family: var(--font-body);
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-width: 120px;
+}
+
+.casino-btn:hover {
+    background: linear-gradient(135deg, #0f5d3d, var(--color-dark-green));
+    box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
+    transform: translateY(-2px);
+}
+
+.casino-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.casino-btn:disabled:hover {
+    box-shadow: none;
+}
+
+.blackjack-result {
+    text-align: center;
+    font-family: var(--font-title);
+    font-size: 1.8rem;
+    color: var(--color-gold);
+    margin-top: 1rem;
+    min-height: 2rem;
+}
+
+/* Слоты */
+.slots-machine {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    padding: 1.5rem;
+    padding-top: 8rem; /* Большой отступ сверху для инвентаря */
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    overflow-x: hidden;
+    margin-top: 0;
+    min-height: calc(100vh - 10rem); /* Занимает оставшееся пространство */
+    justify-content: center; /* Центрируем по вертикали */
+}
+
+.slots-reels {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+    padding: 1.5rem;
+    background: linear-gradient(135deg, rgba(13, 77, 45, 0.4), rgba(26, 26, 26, 0.6));
+    border-radius: 20px;
+    border: 3px solid var(--color-gold);
+    box-shadow: 
+        0 0 40px rgba(212, 175, 55, 0.4),
+        inset 0 0 30px rgba(0, 0, 0, 0.6);
+    position: relative;
+    flex-wrap: nowrap;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+.reel {
+    width: 140px;
+    height: 160px;
+    min-width: 140px;
+    max-width: 140px;
+    flex-shrink: 0;
+    background: linear-gradient(180deg, 
+        rgba(13, 77, 45, 0.9) 0%,
+        rgba(26, 26, 26, 0.95) 50%,
+        rgba(13, 77, 45, 0.9) 100%);
+    border: 3px solid var(--color-gold);
+    border-radius: 12px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 
+        inset 0 0 40px rgba(0, 0, 0, 0.8),
+        0 0 25px rgba(212, 175, 55, 0.5),
+        0 6px 12px rgba(0, 0, 0, 0.7);
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+}
+
+.reel::before,
+.reel::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 20px;
+    background: linear-gradient(180deg, 
+        rgba(0, 0, 0, 0.8) 0%,
+        transparent 100%);
+    z-index: 10;
+    pointer-events: none;
+}
+
+.reel::before {
+    top: 0;
+}
+
+.reel::after {
+    bottom: 0;
+    background: linear-gradient(0deg, 
+        rgba(0, 0, 0, 0.8) 0%,
+        transparent 100%);
+}
+
+.reel-container {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+.reel-symbols {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    will-change: transform;
+    z-index: 1;
+}
+
+.reel-symbol {
+    width: 100%;
+    height: 160px;
+    min-height: 160px;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    font-size: 4.5rem;
+    flex-shrink: 0;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.8));
+    user-select: none;
+    position: relative;
+    z-index: 2;
+    background: transparent;
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
+.reel.win {
+    animation: winReel 0.5s ease-in-out 3;
+    border-color: #FFD700;
+    box-shadow: 
+        inset 0 0 50px rgba(255, 215, 0, 0.3),
+        0 0 50px rgba(255, 215, 0, 0.8),
+        0 8px 16px rgba(0, 0, 0, 0.7);
+}
+
+@keyframes winReel {
+    0%, 100% { 
+        transform: scale(1);
+    }
+    50% { 
+        transform: scale(1.08);
+    }
+}
+
+.slots-controls {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    padding: 0 1rem;
+}
+
+.spin-btn {
+    padding: 1.5rem 4rem;
+    background: linear-gradient(135deg, var(--color-gold), #b8941f);
+    color: var(--color-black);
+    border: 3px solid var(--color-gold);
+    border-radius: 15px;
+    font-family: var(--font-elegant);
+    font-size: 1.6rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 
+        0 8px 25px rgba(212, 175, 55, 0.5),
+        inset 0 2px 10px rgba(255, 255, 255, 0.2),
+        inset 0 -2px 10px rgba(0, 0, 0, 0.2);
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    position: relative;
+    overflow: hidden;
+}
+
+.spin-btn::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+        45deg,
+        transparent,
+        rgba(255, 255, 255, 0.3),
+        transparent
+    );
+    transform: rotate(45deg);
+    transition: all 0.5s ease;
+}
+
+.spin-btn:hover:not(:disabled) {
+    background: linear-gradient(135deg, #e5c147, var(--color-gold));
+    transform: scale(1.05) translateY(-2px);
+    box-shadow: 
+        0 12px 35px rgba(212, 175, 55, 0.7),
+        inset 0 2px 10px rgba(255, 255, 255, 0.3),
+        inset 0 -2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.spin-btn:hover:not(:disabled)::before {
+    left: 100%;
+}
+
+.spin-btn:active:not(:disabled) {
+    transform: scale(0.98) translateY(0);
+    box-shadow: 
+        0 4px 15px rgba(212, 175, 55, 0.4),
+        inset 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.spin-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+    background: linear-gradient(135deg, #666, #444);
+    border-color: #666;
+    box-shadow: none;
+}
+
+.slots-result {
+    text-align: center;
+    font-family: var(--font-title);
+    font-size: 1.8rem;
+    color: var(--color-gold);
+    min-height: 3rem;
+    padding: 1rem;
+    border-radius: 10px;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    background: rgba(13, 77, 45, 0.3);
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.slots-result:not(:empty) {
+    border-color: var(--color-gold);
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+    animation: resultAppear 0.5s ease;
+}
+
+@keyframes resultAppear {
+    0% {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Покер */
+.poker-table {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.poker-community-cards {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    min-height: 150px;
+}
+
+.poker-player-hand {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.poker-controls {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.poker-bet-input {
+    padding: 0.75rem;
+    background: var(--color-dark-gray);
+    color: var(--color-light-gray);
+    border: 2px solid var(--color-gold);
+    border-radius: 5px;
+    font-family: var(--font-body);
+    font-size: 1rem;
+    width: 150px;
+    text-align: center;
+}
+
+.poker-result {
+    text-align: center;
+    font-family: var(--font-title);
+    font-size: 1.8rem;
+    color: var(--color-gold);
+    margin-top: 1rem;
+    min-height: 2rem;
+}
+
+/* Кнопка выхода из мини-игры */
+.btn-exit-minigame {
+    margin-top: 2rem;
+    padding: 0.75rem 2rem;
+    background: var(--color-dark-green);
+    color: var(--color-gold);
+    border: 2px solid var(--color-gold);
+    border-radius: 5px;
+    font-family: var(--font-body);
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-exit-minigame:hover {
+    background: #0f5d3d;
+    box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
+}
+
+/* Анимации выигрыша */
+.win-animation {
+    animation: winPulse 0.5s ease;
+}
+
+@keyframes winPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+

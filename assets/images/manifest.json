@@ -1,0 +1,25 @@
+{
+  "backgrounds": {
+    "casino_lobby": "assets/images/backgrounds/casino_lobby.png",
+    "casino_interior": "assets/images/backgrounds/casino_interior.png",
+    "casino_bar": "assets/images/backgrounds/casino_bar.png",
+    "casino_tables": "assets/images/backgrounds/casino_tables.png",
+    "casino_vip": "assets/images/backgrounds/casino_vip.png"
+  },
+  "characters": {
+    "hero": {
+      "confident": "assets/images/characters/hero_confident.png",
+      "observant": "assets/images/characters/hero_observant.png",
+      "focused": "assets/images/characters/hero_focused.png",
+      "satisfied": "assets/images/characters/hero_satisfied.png",
+      "cautious": "assets/images/characters/hero_cautious.png",
+      "triumphant": "assets/images/characters/hero_triumphant.png"
+    },
+    "bartender": {
+      "neutral": "assets/images/characters/bartender_neutral.png",
+      "confident": "assets/images/characters/bartender_confident.png",
+      "impressed": "assets/images/characters/bartender_impressed.png"
+    }
+  },
+  "generatedAt": "2024-12-19T00:00:00.000Z"
+}
