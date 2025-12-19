@@ -318,7 +318,7 @@ class StoryData {
                         { name: "hero", position: "center", emotion: "cautious" }
                     ],
                     dialogues: [
-                        { speaker: "narrator", text: "VIP-зона. Здесь играют только самые важные гости." },
+                        { speaker: "narrator", text: "VIP area. Only the most important guests play here." },
                         { speaker: "narrator", text: "You see your target - she is sitting at a table in the far corner." },
                         { speaker: "hero", text: "There she is. My mission is almost complete..." }
                     ],
@@ -387,7 +387,7 @@ class StoryData {
                     ],
                     dialogues: [
                         { speaker: "narrator", text: "System not hacked. Guards may notice your attempts." },
-                        { speaker: "hero", text: "Нужно быть осторожнее. Попробую другой подход." }
+                        { speaker: "hero", text: "Need to be more careful. I'll try a different approach." }
                     ],
                     choices: [
                         { 
@@ -411,10 +411,10 @@ class StoryData {
                         { name: "bartender", position: "right", emotion: "impressed" }
                     ],
                     dialogues: [
-                        { speaker: "bartender", text: "Ваша цель находится в VIP-зале на втором этаже." },
-                        { speaker: "bartender", text: "Но туда нужен специальный пропуск. Его можно получить, выиграв турнир по покеру." },
-                        { speaker: "hero", text: "Спасибо за информацию." },
-                        { speaker: "bartender", text: "Удачи. Вам понадобится." }
+                        { speaker: "bartender", text: "Your target is in the VIP room on the second floor." },
+                        { speaker: "bartender", text: "But you need a special pass to get there. You can get it by winning a poker tournament." },
+                        { speaker: "hero", text: "Thanks for the information." },
+                        { speaker: "bartender", text: "Good luck. You'll need it." }
                     ],
                     choices: [
                         { 
@@ -438,9 +438,9 @@ class StoryData {
                         { name: "bartender", position: "right", emotion: "neutral" }
                     ],
                     dialogues: [
-                        { speaker: "bartender", text: "Не повезло. Может, в другой раз?" },
-                        { speaker: "narrator", text: "Бармен уходит, оставляя вас без информации." },
-                        { speaker: "hero", text: "Нужно найти другой способ получить информацию." }
+                        { speaker: "bartender", text: "No luck. Maybe next time?" },
+                        { speaker: "narrator", text: "The bartender leaves, leaving you without information." },
+                        { speaker: "hero", text: "Need to find another way to get information." }
                     ],
                     choices: [
                         { 
@@ -469,8 +469,8 @@ class StoryData {
                         { name: "bartender", position: "right", emotion: "confident" }
                     ],
                     dialogues: [
-                        { speaker: "bartender", text: "Ничья. Но за упорство - небольшая подсказка: ищите в слотах." },
-                        { speaker: "hero", text: "Спасибо. Это поможет." }
+                        { speaker: "bartender", text: "Draw. But for persistence - a small hint: look in the slots." },
+                        { speaker: "hero", text: "Thanks. That will help." }
                     ],
                     choices: [
                         { 
@@ -489,9 +489,9 @@ class StoryData {
                         { name: "bartender", position: "right", emotion: "neutral" }
                     ],
                     dialogues: [
-                        { speaker: "bartender", text: "Вы снова здесь. Что-то еще нужно?" },
+                        { speaker: "bartender", text: "You're here again. Need something else?" },
                         { speaker: "hero", text: "Maybe you know something else about the VIP area?" },
-                        { speaker: "bartender", text: "Там строгая охрана. Без пропуска не пройти." },
+                        { speaker: "bartender", text: "There's strict security there. You can't get through without a pass." },
                         { speaker: "bartender", text: "But if you have connections... or money..." },
                         { speaker: "hero", text: "I see. Thanks." }
                     ],
@@ -516,7 +516,7 @@ class StoryData {
                         { name: "hero", position: "left", emotion: "triumphant" }
                     ],
                     dialogues: [
-                        { speaker: "narrator", text: "Вы выиграли турнир! Пропуск в VIP-зону ваш." },
+                        { speaker: "narrator", text: "You won the tournament! The VIP pass is yours." },
                         { speaker: "narrator", text: "The organizer hands you a golden pass." },
                         { speaker: "hero", text: "Now I can get where I need to go." }
                     ],
@@ -536,8 +536,8 @@ class StoryData {
                         { name: "hero", position: "center", emotion: "cautious" }
                     ],
                     dialogues: [
-                        { speaker: "narrator", text: "Турнир проигран. Нужно найти другой способ." },
-                        { speaker: "hero", text: "Не повезло. Но я не сдаюсь." }
+                        { speaker: "narrator", text: "Tournament lost. Need to find another way." },
+                        { speaker: "hero", text: "No luck. But I won't give up." }
                     ],
                     choices: [
                         { 
@@ -565,9 +565,9 @@ class StoryData {
                         { name: "hero", position: "center", emotion: "observant" }
                     ],
                     dialogues: [
-                        { speaker: "narrator", text: "Вы подходите к входу в VIP-зону. Охранник проверяет ваш пропуск." },
-                        { speaker: "narrator", text: "Пропуск действителен. Охранник пропускает вас." },
-                        { speaker: "hero", text: "Отлично. Теперь нужно найти цель." }
+                        { speaker: "narrator", text: "You approach the VIP entrance. The guard checks your pass." },
+                        { speaker: "narrator", text: "The pass is valid. The guard lets you through." },
+                        { speaker: "hero", text: "Great. Now I need to find the target." }
                     ],
                     choices: [
                         { 
@@ -585,9 +585,9 @@ class StoryData {
                         { name: "hero", position: "left", emotion: "confident" }
                     ],
                     dialogues: [
-                        { speaker: "narrator", text: "Вы подходите к охраннику с предложением." },
-                        { speaker: "narrator", text: "Охранник колеблется, но принимает ваше предложение." },
-                        { speaker: "hero", text: "Деньги решают многое в этом мире." }
+                        { speaker: "narrator", text: "You approach the guard with an offer." },
+                        { speaker: "narrator", text: "The guard hesitates, but accepts your offer." },
+                        { speaker: "hero", text: "Money solves a lot in this world." }
                     ],
                     choices: [
                         { 
@@ -605,11 +605,11 @@ class StoryData {
                         { name: "hero", position: "center", emotion: "cautious" }
                     ],
                     dialogues: [
-                        { speaker: "narrator", text: "VIP-зона. Здесь играют только самые важные гости." },
-                        { speaker: "narrator", text: "Роскошь здесь на каждом шагу. Золотые люстры, бархатные ковры, дорогие напитки." },
-                        { speaker: "narrator", text: "Вы осматриваете зал и видите свою цель - она сидит за столом в дальнем углу." },
+                        { speaker: "narrator", text: "VIP area. Only the most important guests play here." },
+                        { speaker: "narrator", text: "Luxury is everywhere. Golden chandeliers, velvet carpets, expensive drinks." },
+                        { speaker: "narrator", text: "You look around the hall and see your target - she's sitting at a table in the far corner." },
                         { speaker: "hero", text: "There she is. My mission is almost complete..." },
-                        { speaker: "narrator", text: "Но вокруг нее несколько охранников. Нужно быть осторожным." }
+                        { speaker: "narrator", text: "But there are several guards around her. Need to be careful." }
                     ],
                     choices: [
                         { 
@@ -637,9 +637,9 @@ class StoryData {
                         { name: "hero", position: "left", emotion: "confident" }
                     ],
                     dialogues: [
-                        { speaker: "narrator", text: "Вы подходите напрямую к цели. Охранники насторожились." },
-                        { speaker: "narrator", text: "Но ваша уверенность и пропуск делают свое дело - они пропускают вас." },
-                        { speaker: "hero", text: "Иногда лучшая тактика - это прямота." }
+                        { speaker: "narrator", text: "You approach the target directly. The guards are alert." },
+                        { speaker: "narrator", text: "But your confidence and pass do their job - they let you through." },
+                        { speaker: "hero", text: "Sometimes the best tactic is directness." }
                     ],
                     choices: [
                         { 
@@ -657,9 +657,9 @@ class StoryData {
                         { name: "hero", position: "center", emotion: "observant" }
                     ],
                     dialogues: [
-                        { speaker: "narrator", text: "Вы ждете подходящего момента. Время тянется медленно." },
-                        { speaker: "narrator", text: "Наконец, цель встает и направляется к выходу. Охранники следуют за ней." },
-                        { speaker: "hero", text: "Идеальный момент. Теперь я могу подойти незамеченным." }
+                        { speaker: "narrator", text: "You wait for the right moment. Time passes slowly." },
+                        { speaker: "narrator", text: "Finally, the target gets up and heads to the exit. The guards follow her." },
+                        { speaker: "hero", text: "Perfect moment. Now I can approach unnoticed." }
                     ],
                     choices: [
                         { 
@@ -677,7 +677,7 @@ class StoryData {
                         { name: "hero", position: "left", emotion: "focused" }
                     ],
                     dialogues: [
-                        { speaker: "narrator", text: "Вы создаете небольшое происшествие - роняете бокал, привлекая внимание охранников." },
+                        { speaker: "narrator", text: "You create a small incident - drop a glass, attracting the guards' attention." },
                         { speaker: "narrator", text: "While they deal with the situation, you quietly approach the target." },
                         { speaker: "hero", text: "Cunning is sometimes better than force." }
                     ],
@@ -720,8 +720,8 @@ class StoryData {
                         { speaker: "narrator", text: "You are face to face with your mission target." },
                         { speaker: "narrator", text: "She looks at you with surprise but without fear." },
                         { speaker: "target", text: "I knew you would come. The question was only when." },
-                        { speaker: "hero", text: "Тогда вы знаете, зачем я здесь." },
-                        { speaker: "target", text: "Знаю. Но давайте поговорим. Возможно, мы можем договориться." }
+                        { speaker: "hero", text: "Then you know why I'm here." },
+                        { speaker: "target", text: "I know. But let's talk. Maybe we can come to an agreement." }
                     ],
                     choices: [
                         { 
@@ -754,7 +754,7 @@ class StoryData {
                         { speaker: "hero", text: "Interesting. Tell me more." },
                         { speaker: "target", text: "Something bigger is happening in this casino than it seems. Someone is using it for money laundering." },
                         { speaker: "hero", text: "And you want me to investigate this?" },
-                        { speaker: "target", text: "Именно. Помогите мне - и я дам вам то, что вам нужно." }
+                        { speaker: "target", text: "Exactly. Help me - and I'll give you what you need." }
                     ],
                     choices: [
                         { 
@@ -777,10 +777,10 @@ class StoryData {
                         { name: "hero", position: "left", emotion: "confident" }
                     ],
                     dialogues: [
-                        { speaker: "hero", text: "Может быть, мы можем найти компромисс?" },
-                        { speaker: "target", text: "Возможно. Но что вы можете предложить?" },
-                        { speaker: "hero", text: "Я могу помочь вам с вашей проблемой, но мне нужны гарантии." },
-                        { speaker: "target", text: "Честно говоря, это лучше, чем я ожидала. Давайте договоримся." }
+                        { speaker: "hero", text: "Maybe we can find a compromise?" },
+                        { speaker: "target", text: "Maybe. But what can you offer?" },
+                        { speaker: "hero", text: "I can help you with your problem, but I need guarantees." },
+                        { speaker: "target", text: "Honestly, this is better than I expected. Let's make a deal." }
                     ],
                     choices: [
                         { 
@@ -799,14 +799,14 @@ class StoryData {
                     ],
                     dialogues: [
                         { speaker: "target", text: "Excellent. Here is the information you need." },
-                        { speaker: "narrator", text: "Она передает вам конверт с документами." },
-                        { speaker: "target", text: "Теперь ваша очередь. Найдите того, кто стоит за отмыванием денег." },
-                        { speaker: "hero", text: "Спасибо. Я выполню свою часть сделки." },
-                        { speaker: "narrator", text: "Вы получили новую информацию и новую миссию. История продолжается..." }
+                        { speaker: "narrator", text: "She hands you an envelope with documents." },
+                        { speaker: "target", text: "Now it's your turn. Find the one behind the money laundering." },
+                        { speaker: "hero", text: "Thanks. I'll fulfill my part of the deal." },
+                        { speaker: "narrator", text: "You received new information and a new mission. The story continues..." }
                     ],
                     choices: [
                         { 
-                            text: "Начать расследование", 
+                            text: "Start Investigation", 
                             nextScene: "investigation_start",
                             required: null
                         },
@@ -825,9 +825,9 @@ class StoryData {
                         { name: "hero", position: "left", emotion: "triumphant" }
                     ],
                     dialogues: [
-                        { speaker: "narrator", text: "Вы выполнили свою миссию. Цель нейтрализована." },
-                        { speaker: "hero", text: "Миссия выполнена. Но что-то подсказывает, что это только начало." },
-                        { speaker: "narrator", text: "Вы покидаете VIP-зону, оставляя за собой завершенную миссию." }
+                        { speaker: "narrator", text: "You completed your mission. Target neutralized." },
+                        { speaker: "hero", text: "Mission accomplished. But something tells me this is just the beginning." },
+                        { speaker: "narrator", text: "You leave the VIP area, leaving behind a completed mission." }
                     ],
                     choices: [
                         { 
@@ -845,9 +845,9 @@ class StoryData {
                         { name: "hero", position: "center", emotion: "focused" }
                     ],
                     dialogues: [
-                        { speaker: "narrator", text: "Вы начинаете расследование. Документы указывают на несколько подозрительных операций." },
-                        { speaker: "hero", text: "Нужно проверить финансовые операции казино. Начну с главного офиса." },
-                        { speaker: "narrator", text: "Но доступ туда ограничен. Нужно найти способ попасть внутрь." }
+                        { speaker: "narrator", text: "You start the investigation. The documents point to several suspicious operations." },
+                        { speaker: "hero", text: "Need to check the casino's financial operations. I'll start with the main office." },
+                        { speaker: "narrator", text: "But access there is limited. Need to find a way to get inside." }
                     ],
                     choices: [
                         { 
@@ -856,7 +856,7 @@ class StoryData {
                             required: null
                         },
                         { 
-                            text: "Найти сотрудника, который может помочь", 
+                            text: "Find an employee who can help", 
                             nextScene: "find_employee",
                             required: null
                         },
@@ -875,8 +875,8 @@ class StoryData {
                         { name: "hero", position: "center", emotion: "focused" }
                     ],
                     dialogues: [
-                        { speaker: "narrator", text: "Вы находите компьютер с доступом к системе безопасности." },
-                        { speaker: "hero", text: "Это может быть сложно, но я попробую." }
+                        { speaker: "narrator", text: "You find a computer with access to the security system." },
+                        { speaker: "hero", text: "This might be difficult, but I'll try." }
                     ],
                     choices: [],
                     minigame: "slots",
@@ -884,20 +884,20 @@ class StoryData {
                         jackpot: {
                             sceneId: "office_hack_success",
                             dialogues: [
-                                { speaker: "narrator", text: "Система взломана! Вы получили доступ к финансовым записям." },
-                                { speaker: "hero", text: "Отлично! Теперь я вижу, что происходит." }
+                                { speaker: "narrator", text: "System hacked! You gained access to financial records." },
+                                { speaker: "hero", text: "Excellent! Now I can see what's happening." }
                             ]
                         },
                         win: {
                             sceneId: "office_hack_partial",
                             dialogues: [
-                                { speaker: "narrator", text: "Частичный доступ получен. Вы видите часть информации." }
+                                { speaker: "narrator", text: "Partial access obtained. You see part of the information." }
                             ]
                         },
                         lose: {
                             sceneId: "office_hack_fail",
                             dialogues: [
-                                { speaker: "narrator", text: "Взлом не удался. Система безопасности сработала." }
+                                { speaker: "narrator", text: "Hack failed. Security system activated." }
                             ]
                         }
                     }
@@ -909,13 +909,13 @@ class StoryData {
                         { name: "hero", position: "center", emotion: "satisfied" }
                     ],
                     dialogues: [
-                        { speaker: "narrator", text: "Вы нашли доказательства отмывания денег. Главный подозреваемый - директор казино." },
-                        { speaker: "hero", text: "Теперь нужно собрать больше доказательств и передать их." },
-                        { speaker: "narrator", text: "Миссия выполнена. Вы раскрыли заговор." }
+                        { speaker: "narrator", text: "You found evidence of money laundering. The main suspect is the casino director." },
+                        { speaker: "hero", text: "Now need to gather more evidence and hand it over." },
+                        { speaker: "narrator", text: "Mission accomplished. You uncovered the conspiracy." }
                     ],
                     choices: [
                         { 
-                            text: "Завершить миссию", 
+                            text: "Complete Mission", 
                             nextScene: "finale_success",
                             required: null
                         }
@@ -929,8 +929,8 @@ class StoryData {
                         { name: "hero", position: "center", emotion: "focused" }
                     ],
                     dialogues: [
-                        { speaker: "narrator", text: "Вы видите часть информации, но нужны дополнительные доказательства." },
-                        { speaker: "hero", text: "Нужно найти другой способ получить полный доступ." }
+                        { speaker: "narrator", text: "You see part of the information, but need additional evidence." },
+                        { speaker: "hero", text: "Need to find another way to get full access." }
                     ],
                     choices: [
                         { 
@@ -939,7 +939,7 @@ class StoryData {
                             required: null
                         },
                         { 
-                            text: "Найти сотрудника", 
+                            text: "Find Employee", 
                             nextScene: "find_employee",
                             required: null
                         }
@@ -953,12 +953,12 @@ class StoryData {
                         { name: "hero", position: "center", emotion: "cautious" }
                     ],
                     dialogues: [
-                        { speaker: "narrator", text: "Взлом не удался. Охранники могут быть на пути." },
-                        { speaker: "hero", text: "Нужно быстро найти другой способ." }
+                        { speaker: "narrator", text: "Hack failed. Guards may be on the way." },
+                        { speaker: "hero", text: "Need to quickly find another way." }
                     ],
                     choices: [
                         { 
-                            text: "Найти сотрудника", 
+                            text: "Find Employee", 
                             nextScene: "find_employee",
                             required: null
                         },
@@ -977,19 +977,19 @@ class StoryData {
                         { name: "hero", position: "left", emotion: "confident" }
                     ],
                     dialogues: [
-                        { speaker: "narrator", text: "Вы находите сотрудника, который выглядит недовольным." },
-                        { speaker: "employee", text: "Я знаю, что здесь происходит что-то неладное. Но боюсь говорить." },
-                        { speaker: "hero", text: "Я могу помочь. Но мне нужна информация." },
-                        { speaker: "employee", text: "Хорошо. Но только если вы обещаете защитить меня." }
+                        { speaker: "narrator", text: "You find an employee who looks dissatisfied." },
+                        { speaker: "employee", text: "I know something wrong is happening here. But I'm afraid to speak." },
+                        { speaker: "hero", text: "I can help. But I need information." },
+                        { speaker: "employee", text: "Okay. But only if you promise to protect me." }
                     ],
                     choices: [
                         { 
-                            text: "Пообещать защиту", 
+                            text: "Promise Protection", 
                             nextScene: "employee_info",
                             required: null
                         },
                         { 
-                            text: "Предложить деньги", 
+                            text: "Offer Money", 
                             nextScene: "employee_bribe",
                             required: "ticket"
                         }
@@ -1003,14 +1003,14 @@ class StoryData {
                         { name: "hero", position: "left", emotion: "satisfied" }
                     ],
                     dialogues: [
-                        { speaker: "employee", text: "Директор казино отмывает деньги через подставные компании." },
-                        { speaker: "employee", text: "У меня есть документы, которые это доказывают." },
-                        { speaker: "narrator", text: "Сотрудник передает вам папку с документами." },
-                        { speaker: "hero", text: "Спасибо. Это очень поможет." }
+                        { speaker: "employee", text: "The casino director launders money through shell companies." },
+                        { speaker: "employee", text: "I have documents that prove it." },
+                        { speaker: "narrator", text: "The employee hands you a folder with documents." },
+                        { speaker: "hero", text: "Thanks. This will help a lot." }
                     ],
                     choices: [
                         { 
-                            text: "Передать доказательства", 
+                            text: "Hand Over Evidence", 
                             nextScene: "finale_success",
                             required: null
                         }
@@ -1024,13 +1024,13 @@ class StoryData {
                         { name: "hero", position: "left", emotion: "confident" }
                     ],
                     dialogues: [
-                        { speaker: "employee", text: "Хм... Это меняет дело." },
-                        { speaker: "narrator", text: "Сотрудник берет деньги и передает вам информацию." },
-                        { speaker: "employee", text: "Вот все, что я знаю. Теперь оставьте меня в покое." }
+                        { speaker: "employee", text: "Hmm... This changes things." },
+                        { speaker: "narrator", text: "The employee takes the money and gives you information." },
+                        { speaker: "employee", text: "That's all I know. Now leave me alone." }
                     ],
                     choices: [
                         { 
-                            text: "Использовать информацию", 
+                            text: "Use Information", 
                             nextScene: "finale_success",
                             required: null
                         }
@@ -1044,9 +1044,9 @@ class StoryData {
                         { name: "hero", position: "center", emotion: "observant" }
                     ],
                     dialogues: [
-                        { speaker: "narrator", text: "Вы ждете подходящего момента. Время идет медленно." },
-                        { speaker: "narrator", text: "Наконец, директор покидает офис. Охранники следуют за ним." },
-                        { speaker: "hero", text: "Идеальный момент. Теперь я могу попасть внутрь." }
+                        { speaker: "narrator", text: "You wait for the right moment. Time passes slowly." },
+                        { speaker: "narrator", text: "Finally, the director leaves the office. Guards follow him." },
+                        { speaker: "hero", text: "Perfect moment. Now I can get inside." }
                     ],
                     choices: [
                         { 
@@ -1064,13 +1064,13 @@ class StoryData {
                         { name: "hero", position: "center", emotion: "focused" }
                     ],
                     dialogues: [
-                        { speaker: "narrator", text: "Вы обыскиваете офис директора. В сейфе находите важные документы." },
-                        { speaker: "hero", text: "Вот оно! Доказательства отмывания денег." },
-                        { speaker: "narrator", text: "Вы фотографируете документы и покидаете офис." }
+                        { speaker: "narrator", text: "You search the director's office. In the safe you find important documents." },
+                        { speaker: "hero", text: "There it is! Evidence of money laundering." },
+                        { speaker: "narrator", text: "You photograph the documents and leave the office." }
                     ],
                     choices: [
                         { 
-                            text: "Передать доказательства", 
+                            text: "Hand Over Evidence", 
                             nextScene: "finale_success",
                             required: null
                         }
@@ -1084,10 +1084,10 @@ class StoryData {
                         { name: "hero", position: "center", emotion: "triumphant" }
                     ],
                     dialogues: [
-                        { speaker: "narrator", text: "Вы успешно завершили миссию. Доказательства переданы." },
-                        { speaker: "narrator", text: "Заговор раскрыт, виновные будут наказаны." },
-                        { speaker: "hero", text: "Миссия выполнена. Но это только первая волна удачи..." },
-                        { speaker: "narrator", text: "Глава 1 завершена успешно! Следите за обновлениями для продолжения истории!" }
+                        { speaker: "narrator", text: "You successfully completed the mission. Evidence handed over." },
+                        { speaker: "narrator", text: "Conspiracy uncovered, the guilty will be punished." },
+                        { speaker: "hero", text: "Mission accomplished. But this is only the first wave of luck..." },
+                        { speaker: "narrator", text: "Chapter 1 completed successfully! Stay tuned for updates to continue the story!" }
                     ],
                     choices: [
                         { 
