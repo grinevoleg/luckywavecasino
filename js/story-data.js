@@ -1123,6 +1123,5 @@ class StoryData {
     }
 }
 
-// Экспорт
 window.StoryData = StoryData;
 
