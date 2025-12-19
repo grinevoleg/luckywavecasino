@@ -1,6 +1,4 @@
-/**
- * Система интерфейсных уведомлений
- */
+
 
 class NotificationSystem {
     constructor() {
@@ -10,9 +8,7 @@ class NotificationSystem {
         }
     }
 
-    /**
-     * Показывает уведомление
-     */
+    
     show(message, type = 'info', title = null, duration = 3000) {
         if (!this.container) return;
 
@@ -38,8 +34,7 @@ class NotificationSystem {
 
         this.container.appendChild(notification);
 
-        // Автоматическое скрытие
-        if (duration > 0) {
+                if (duration > 0) {
             setTimeout(() => {
                 this.hide(notification);
             }, duration);
@@ -48,9 +43,7 @@ class NotificationSystem {
         return notification;
     }
 
-    /**
-     * Скрывает уведомление
-     */
+    
     hide(notification) {
         if (!notification) return;
         
@@ -62,9 +55,7 @@ class NotificationSystem {
         }, 300);
     }
 
-    /**
-     * Получает иконку для типа уведомления
-     */
+    
     getIcon(type) {
         const icons = {
             success: '✓',
@@ -75,9 +66,7 @@ class NotificationSystem {
         return icons[type] || icons.info;
     }
 
-    /**
-     * Получает заголовок по умолчанию
-     */
+    
     getDefaultTitle(type) {
         const titles = {
             success: 'Success',
@@ -88,9 +77,7 @@ class NotificationSystem {
         return titles[type] || titles.info;
     }
 
-    /**
-     * Быстрые методы
-     */
+    
     success(message, title = null) {
         return this.show(message, 'success', title);
     }
@@ -108,9 +95,7 @@ class NotificationSystem {
     }
 }
 
-/**
- * Система модальных окон подтверждения
- */
+
 class ConfirmSystem {
     constructor() {
         this.modal = document.getElementById('confirm-modal');
@@ -124,22 +109,18 @@ class ConfirmSystem {
             return;
         }
 
-        // Закрытие по клику вне модального окна
-        this.modal.addEventListener('click', (e) => {
+                this.modal.addEventListener('click', (e) => {
             if (e.target === this.modal) {
                 this.hide();
             }
         });
     }
 
-    /**
-     * Показывает модальное окно подтверждения
-     */
+    
     show(message, title = 'Confirmation') {
         return new Promise((resolve) => {
             if (!this.modal) {
-                // Fallback на стандартный confirm если модалка не найдена
-                resolve(confirm(message));
+                                resolve(confirm(message));
                 return;
             }
 
@@ -164,29 +145,23 @@ class ConfirmSystem {
         });
     }
 
-    /**
-     * Скрывает модальное окно
-     */
+    
     hide() {
         if (this.modal) {
             this.modal.classList.add('hidden');
         }
     }
 
-    /**
-     * Очищает обработчики
-     */
+    
     cleanup() {
         this.yesBtn.onclick = null;
         this.noBtn.onclick = null;
     }
 }
 
-// Создаем глобальные экземпляры
 window.notifications = new NotificationSystem();
 window.confirmDialog = new ConfirmSystem();
 
-// Экспорт
 window.NotificationSystem = NotificationSystem;
 window.ConfirmSystem = ConfirmSystem;
 

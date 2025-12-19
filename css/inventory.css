@@ -1,8 +1,6 @@
-/**
- * Стили для системы инвентаря и достижений
- */
 
-/* Инвентарь HUD - внутри хедера */
+
+
 .game-header .inventory-hud {
     display: flex !important;
     flex-direction: row !important;
@@ -21,7 +19,7 @@
     padding: 0 !important;
 }
 
-/* Общий стиль для инвентаря (если используется вне хедера) */
+
 .inventory-hud {
     display: flex;
     flex-direction: row;
@@ -29,7 +27,7 @@
     align-items: center;
 }
 
-/* Скрываем инвентарь на экране мини-игры */
+
 #minigame-screen .inventory-hud {
     display: none !important;
 }
@@ -63,7 +61,7 @@
     text-align: right;
 }
 
-/* Экран достижений */
+
 .achievements-container {
     max-width: 800px;
     width: 90%;
@@ -177,7 +175,7 @@
     margin-top: 0.5rem;
 }
 
-/* Мобильная адаптация */
+
 @media screen and (max-width: 768px) {
     .game-header .inventory-hud {
         gap: 8px;

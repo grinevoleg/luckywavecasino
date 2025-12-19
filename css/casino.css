@@ -1,4 +1,4 @@
-/* Стили мини-игр казино */
+
 
 #minigame-screen {
     background: linear-gradient(135deg, var(--color-black), var(--color-dark-gray));
@@ -27,8 +27,8 @@
     width: 100%;
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
     margin: auto;
-    /* Безопасная зона для мобильных */
-    margin-top: max(6rem, env(safe-area-inset-top)); /* Большой отступ сверху для инвентаря */
+    
+    margin-top: max(6rem, env(safe-area-inset-top)); 
     margin-bottom: max(1rem, env(safe-area-inset-bottom));
     overflow-y: auto;
     max-height: calc(100vh - 8rem);
@@ -51,7 +51,7 @@
     font-size: 1.1rem;
 }
 
-/* Блэкджек */
+
 .blackjack-table {
     display: flex;
     flex-direction: column;
@@ -175,21 +175,21 @@
     min-height: 2rem;
 }
 
-/* Слоты */
+
 .slots-machine {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 2rem;
     padding: 1.5rem;
-    padding-top: 8rem; /* Большой отступ сверху для инвентаря */
+    padding-top: 8rem; 
     width: 100%;
     max-width: 100%;
     box-sizing: border-box;
     overflow-x: hidden;
     margin-top: 0;
-    min-height: calc(100vh - 10rem); /* Занимает оставшееся пространство */
-    justify-content: center; /* Центрируем по вертикали */
+    min-height: calc(100vh - 10rem); 
+    justify-content: center; 
 }
 
 .slots-reels {
@@ -431,7 +431,7 @@
     }
 }
 
-/* Покер */
+
 .poker-table {
     display: flex;
     flex-direction: column;
@@ -480,7 +480,7 @@
     min-height: 2rem;
 }
 
-/* Кнопка выхода из мини-игры */
+
 .btn-exit-minigame {
     margin-top: 2rem;
     padding: 0.75rem 2rem;
@@ -499,7 +499,7 @@
     box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
 }
 
-/* Анимации выигрыша */
+
 .win-animation {
     animation: winPulse 0.5s ease;
 }

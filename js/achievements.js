@@ -1,6 +1,4 @@
-/**
- * Система достижений
- */
+
 
 class Achievements {
     constructor() {
@@ -28,9 +26,7 @@ class Achievements {
         this.load();
     }
 
-    /**
-     * Разблокирует достижение
-     */
+    
     unlock(achievementId) {
         if (this.achievements[achievementId] && !this.achievements[achievementId].unlocked) {
             this.achievements[achievementId].unlocked = true;
@@ -41,35 +37,27 @@ class Achievements {
         return false;
     }
 
-    /**
-     * Проверяет достижения
-     */
+    
     checkAchievements() {
-        // Первая победа
-        if (this.stats.games_won >= 1 && !this.achievements.first_win.unlocked) {
+                if (this.stats.games_won >= 1 && !this.achievements.first_win.unlocked) {
             this.unlock('first_win');
         }
 
-        // Мастер блэкджека
-        if (this.stats.blackjack_wins >= 3 && !this.achievements.blackjack_master.unlocked) {
+                if (this.stats.blackjack_wins >= 3 && !this.achievements.blackjack_master.unlocked) {
             this.unlock('blackjack_master');
         }
 
-        // Богач
-        const inventory = window.game?.inventory;
+                const inventory = window.game?.inventory;
         if (inventory && inventory.getAmount('money') >= 10000 && !this.achievements.rich.unlocked) {
             this.unlock('rich');
         }
 
-        // Коллекционер
-        if (inventory && inventory.getAmount('keys') >= 10 && !this.achievements.collector.unlocked) {
+                if (inventory && inventory.getAmount('keys') >= 10 && !this.achievements.collector.unlocked) {
             this.unlock('collector');
         }
     }
 
-    /**
-     * Обновляет статистику
-     */
+    
     updateStat(statName, value = 1) {
         if (this.stats[statName] !== undefined) {
             if (Array.isArray(this.stats[statName])) {
@@ -84,9 +72,7 @@ class Achievements {
         }
     }
 
-    /**
-     * Показывает уведомление о достижении
-     */
+    
     showNotification(achievementId) {
         const achievement = this.achievements[achievementId];
         if (!achievement) return;
@@ -96,9 +82,7 @@ class Achievements {
         }
     }
 
-    /**
-     * Получает список разблокированных достижений
-     */
+    
     getUnlocked() {
         return Object.keys(this.achievements)
             .filter(id => this.achievements[id].unlocked)
@@ -108,9 +92,7 @@ class Achievements {
             }));
     }
 
-    /**
-     * Получает прогресс достижения
-     */
+    
     getProgress(achievementId) {
         const achievement = this.achievements[achievementId];
         if (!achievement) return 0;
@@ -133,9 +115,7 @@ class Achievements {
         }
     }
 
-    /**
-     * Сохраняет достижения
-     */
+    
     save() {
         try {
             localStorage.setItem('achievements', JSON.stringify({
@@ -147,9 +127,7 @@ class Achievements {
         }
     }
 
-    /**
-     * Загружает достижения
-     */
+    
     load() {
         try {
             const saved = localStorage.getItem('achievements');
@@ -163,9 +141,7 @@ class Achievements {
         }
     }
 
-    /**
-     * Сбрасывает достижения
-     */
+    
     reset() {
         Object.keys(this.achievements).forEach(id => {
             this.achievements[id].unlocked = false;
@@ -183,7 +159,6 @@ class Achievements {
     }
 }
 
-// Экспорт
 window.Achievements = Achievements;
 
 

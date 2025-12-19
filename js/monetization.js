@@ -1,6 +1,4 @@
-/**
- * Система монетизации: ключи/билеты, премиум-выборы, косметика
- */
+
 
 class Monetization {
     constructor() {
@@ -15,9 +13,7 @@ class Monetization {
         this.loadFromStorage();
     }
 
-    /**
-     * Загружает данные из LocalStorage
-     */
+    
     loadFromStorage() {
         try {
             const data = localStorage.getItem('lucky_wave_monetization');
@@ -33,9 +29,7 @@ class Monetization {
         }
     }
 
-    /**
-     * Сохраняет данные в LocalStorage
-     */
+    
     saveToStorage() {
         try {
             const data = {
@@ -50,18 +44,14 @@ class Monetization {
         }
     }
 
-    /**
-     * Добавляет ключи
-     */
+    
     addKeys(amount) {
         this.keys += amount;
         this.saveToStorage();
         this.updateUI();
     }
 
-    /**
-     * Использует ключ для открытия главы
-     */
+    
     useKey() {
         if (this.keys > 0) {
             this.keys--;
@@ -72,25 +62,19 @@ class Monetization {
         return false;
     }
 
-    /**
-     * Проверяет, есть ли ключи
-     */
+    
     hasKeys() {
         return this.keys > 0;
     }
 
-    /**
-     * Добавляет билеты
-     */
+    
     addTickets(amount) {
         this.tickets += amount;
         this.saveToStorage();
         this.updateUI();
     }
 
-    /**
-     * Использует билет для премиум-выбора
-     */
+    
     useTicket() {
         if (this.tickets > 0) {
             this.tickets--;
@@ -101,16 +85,12 @@ class Monetization {
         return false;
     }
 
-    /**
-     * Проверяет, есть ли билеты
-     */
+    
     hasTickets() {
         return this.tickets > 0;
     }
 
-    /**
-     * Разблокирует премиум-выбор
-     */
+    
     unlockPremiumChoice(choiceId) {
         if (!this.premiumChoices.includes(choiceId)) {
             this.premiumChoices.push(choiceId);
@@ -118,20 +98,15 @@ class Monetization {
         }
     }
 
-    /**
-     * Проверяет, разблокирован ли премиум-выбор
-     */
+    
     isPremiumChoiceUnlocked(choiceId) {
         return this.premiumChoices.includes(choiceId);
     }
 
-    /**
-     * Покупает премиум-выбор (использует билет или ключ)
-     */
+    
     purchasePremiumChoice(choiceId, useTicket = true) {
         if (this.isPremiumChoiceUnlocked(choiceId)) {
-            return true; // Уже разблокирован
-        }
+            return true;         }
 
         if (useTicket && this.hasTickets()) {
             this.useTicket();
@@ -146,9 +121,7 @@ class Monetization {
         return false;
     }
 
-    /**
-     * Добавляет косметический предмет
-     */
+    
     addCosmetic(type, itemId) {
         if (!this.cosmetics[type]) {
             this.cosmetics[type] = [];
@@ -160,9 +133,7 @@ class Monetization {
         }
     }
 
-    /**
-     * Устанавливает текущий наряд
-     */
+    
     setOutfit(outfitId) {
         if (this.cosmetics.outfits.includes(outfitId) || outfitId === 'default') {
             this.cosmetics.currentOutfit = outfitId;
@@ -172,19 +143,14 @@ class Monetization {
         return false;
     }
 
-    /**
-     * Получает текущий наряд
-     */
+    
     getCurrentOutfit() {
         return this.cosmetics.currentOutfit;
     }
 
-    /**
-     * Обновляет UI (если есть элементы для отображения)
-     */
+    
     updateUI() {
-        // Обновляем счетчики ключей и билетов, если они есть на странице
-        const keysEl = document.getElementById('keys-count');
+                const keysEl = document.getElementById('keys-count');
         const ticketsEl = document.getElementById('tickets-count');
         
         if (keysEl) {
@@ -196,33 +162,23 @@ class Monetization {
         }
     }
 
-    /**
-     * Покупка ключей (заглушка для интеграции с платежной системой)
-     */
+    
     purchaseKeys(amount, price) {
-        // В реальной реализации здесь будет интеграция с платежной системой
-        console.log(`Покупка ${amount} ключей за ${price}`);
+                console.log(`Покупка ${amount} ключей за ${price}`);
         
-        // Для MVP просто добавляем ключи
-        this.addKeys(amount);
+                this.addKeys(amount);
         return true;
     }
 
-    /**
-     * Покупка билетов (заглушка для интеграции с платежной системой)
-     */
+    
     purchaseTickets(amount, price) {
-        // В реальной реализации здесь будет интеграция с платежной системой
-        console.log(`Покупка ${amount} билетов за ${price}`);
+                console.log(`Покупка ${amount} билетов за ${price}`);
         
-        // Для MVP просто добавляем билеты
-        this.addTickets(amount);
+                this.addTickets(amount);
         return true;
     }
 
-    /**
-     * Сброс данных (для тестирования)
-     */
+    
     reset() {
         this.keys = 0;
         this.tickets = 0;
@@ -235,9 +191,7 @@ class Monetization {
         this.updateUI();
     }
 
-    /**
-     * Дает стартовые ресурсы для тестирования
-     */
+    
     giveTestResources() {
         this.addKeys(5);
         this.addTickets(10);
@@ -246,6 +200,5 @@ class Monetization {
     }
 }
 
-// Экспорт
 window.Monetization = Monetization;
 

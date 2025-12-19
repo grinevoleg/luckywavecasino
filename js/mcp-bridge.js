@@ -1,27 +1,16 @@
-/**
- * Мост для интеграции с MCP сервером Hugging Face
- * Этот файл обеспечивает связь между браузером и MCP сервером
- * 
- * ВАЖНО: Для работы с реальным MCP сервером нужен серверный прокси или WebSocket соединение
- * Этот файл предоставляет интерфейс для вызова функций MCP
- */
+
 
 class MCPBridge {
     constructor() {
-        this.serverUrl = null; // URL серверного прокси для MCP
-        this.wsConnection = null;
+        this.serverUrl = null;         this.wsConnection = null;
         this.isConnected = false;
     }
 
-    /**
-     * Инициализирует соединение с MCP сервером
-     * @param {string} serverUrl - URL серверного прокси (опционально)
-     */
+    
     async init(serverUrl = null) {
         this.serverUrl = serverUrl;
         
-        // Если указан URL, пытаемся подключиться через HTTP
-        if (serverUrl) {
+                if (serverUrl) {
             try {
                 const response = await fetch(`${serverUrl}/health`);
                 if (response.ok) {
@@ -34,11 +23,9 @@ class MCPBridge {
             }
         }
 
-        // Пытаемся использовать WebSocket если доступен
-        if (window.WebSocket) {
+                if (window.WebSocket) {
             try {
-                // В реальной реализации здесь будет WebSocket соединение
-                // const wsUrl = 'ws://localhost:8080/mcp';
+                                // const wsUrl = 'ws://localhost:8080/mcp';
                 // this.wsConnection = new WebSocket(wsUrl);
                 // this.setupWebSocketHandlers();
                 console.log('MCP Bridge: WebSocket не настроен, используем placeholder режим');
@@ -47,26 +34,19 @@ class MCPBridge {
             }
         }
 
-        // Если ничего не работает, используем placeholder режим
-        console.log('MCP Bridge: Работает в placeholder режиме');
+                console.log('MCP Bridge: Работает в placeholder режиме');
         return false;
     }
 
-    /**
-     * Генерирует изображение через HF MCP сервер
-     * @param {object} params - Параметры генерации
-     * @returns {Promise<string>} - URL или base64 изображения
-     */
+    
     async generateImage(params) {
         if (!this.isConnected && !this.serverUrl) {
-            // Возвращаем null, чтобы использовать placeholder
-            return null;
+                        return null;
         }
 
         try {
             if (this.serverUrl) {
-                // HTTP запрос к прокси серверу
-                const response = await fetch(`${this.serverUrl}/generate-image`, {
+                                const response = await fetch(`${this.serverUrl}/generate-image`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -80,8 +60,7 @@ class MCPBridge {
                 }
             }
 
-            // WebSocket запрос
-            if (this.wsConnection && this.wsConnection.readyState === WebSocket.OPEN) {
+                        if (this.wsConnection && this.wsConnection.readyState === WebSocket.OPEN) {
                 return new Promise((resolve, reject) => {
                     const requestId = Math.random().toString(36);
                     
@@ -104,8 +83,7 @@ class MCPBridge {
                         params: params
                     }));
 
-                    // Таймаут
-                    setTimeout(() => {
+                                        setTimeout(() => {
                         this.wsConnection.removeEventListener('message', handler);
                         reject(new Error('Timeout'));
                     }, 30000);
@@ -119,9 +97,7 @@ class MCPBridge {
         return null;
     }
 
-    /**
-     * Настраивает обработчики WebSocket
-     */
+    
     setupWebSocketHandlers() {
         if (!this.wsConnection) return;
 
@@ -142,18 +118,14 @@ class MCPBridge {
     }
 }
 
-// Создаем глобальный экземпляр
 window.mcpBridge = new MCPBridge();
 
-// Инициализируем при загрузке (можно настроить URL через переменную окружения или конфиг)
 document.addEventListener('DOMContentLoaded', () => {
-    // Проверяем наличие конфигурации
-    const mcpServerUrl = window.MCP_SERVER_URL || null;
+        const mcpServerUrl = window.MCP_SERVER_URL || null;
     if (mcpServerUrl) {
         window.mcpBridge.init(mcpServerUrl);
     }
 });
 
-// Экспорт для использования в других модулях
 window.MCPBridge = MCPBridge;
 

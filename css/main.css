@@ -1,4 +1,4 @@
-/* Основные стили */
+
 
 * {
     margin: 0;
@@ -19,7 +19,7 @@
     --font-elegant: 'Cinzel', serif;
     --font-body: 'Roboto', sans-serif;
     
-    /* Переменная для высоты viewport на iOS */
+    
     --vh: 1vh;
 }
 
@@ -29,13 +29,13 @@ body {
     color: var(--color-light-gray);
     overflow: hidden;
     height: 100vh;
-    height: calc(var(--vh, 1vh) * 100); /* Для iOS Safari */
-    height: -webkit-fill-available; /* Для iOS Safari */
+    height: calc(var(--vh, 1vh) * 100); 
+    height: -webkit-fill-available; 
     width: 100vw;
-    /* Предотвращение bounce эффекта на iOS */
+    
     overscroll-behavior: none;
     -webkit-overflow-scrolling: touch;
-    /* Безопасная зона для iPhone с вырезом */
+    
     padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
 }
 
@@ -74,13 +74,13 @@ body {
     display: none !important;
     width: 100%;
     height: 100%;
-    height: -webkit-fill-available; /* Для iOS Safari */
+    height: -webkit-fill-available; 
     position: absolute;
     top: 0;
     left: 0;
     z-index: 1;
-    /* Безопасная зона для iPhone с вырезом */
-    padding-top: calc(80px + env(safe-area-inset-top)); /* Отступ для фиксированного хедера */
+    
+    padding-top: calc(80px + env(safe-area-inset-top)); 
     padding-bottom: env(safe-area-inset-bottom);
     padding-left: env(safe-area-inset-left);
     padding-right: env(safe-area-inset-right);
@@ -100,7 +100,7 @@ body {
     display: flex !important;
 }
 
-/* Главное меню */
+
 .menu-container {
     text-align: center;
     padding: 2rem;
@@ -154,7 +154,7 @@ body {
     transform: translateY(0);
 }
 
-/* Кнопка меню в хедере */
+
 .game-header .btn-menu-toggle {
     position: relative;
     margin-left: auto;
@@ -170,7 +170,7 @@ body {
     flex-shrink: 0;
 }
 
-/* Общий стиль для кнопки меню (если используется вне хедера) */
+
 .btn-menu-toggle {
     background: rgba(26, 26, 26, 0.8);
     color: var(--color-gold);
@@ -187,16 +187,16 @@ body {
     box-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
 }
 
-/* Меню в игре */
+
 .game-menu {
     position: fixed;
-    top: 90px; /* Ниже хедера (80px + отступ) */
+    top: 90px; 
     right: 20px;
     background: rgba(26, 26, 26, 0.95);
     border: 2px solid var(--color-gold);
     border-radius: 5px;
     padding: 1rem;
-    z-index: 1000; /* Выше инвентаря */
+    z-index: 1000; 
     min-width: 200px;
 }
 
@@ -227,7 +227,7 @@ body {
     margin-bottom: 0;
 }
 
-/* Экран сохранений/загрузки */
+
 .save-load-container {
     background: rgba(26, 26, 26, 0.95);
     border: 2px solid var(--color-gold);
@@ -238,8 +238,8 @@ body {
     max-width: calc(100vw - 2rem);
     box-sizing: border-box;
     overflow-y: auto;
-    max-height: calc(100vh - 8rem); /* Учитываем инвентарь сверху */
-    margin: 6rem auto 1rem auto; /* Большой отступ сверху для инвентаря */
+    max-height: calc(100vh - 8rem); 
+    margin: 6rem auto 1rem auto; 
     position: relative;
 }
 
@@ -322,7 +322,7 @@ body {
     box-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
 }
 
-/* Загрузочный экран */
+
 .loading-container {
     text-align: center;
 }
@@ -347,7 +347,7 @@ body {
     font-size: 1.2rem;
 }
 
-/* Система уведомлений */
+
 .notification-container {
     position: fixed;
     top: 20px;
@@ -454,7 +454,7 @@ body {
     }
 }
 
-/* Модальное окно подтверждения */
+
 .modal-overlay {
     position: fixed;
     top: 0;
@@ -547,7 +547,7 @@ body {
     box-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
 }
 
-/* Утилиты */
+
 .hidden {
     display: none !important;
 }
